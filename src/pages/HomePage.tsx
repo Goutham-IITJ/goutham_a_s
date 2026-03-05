@@ -6,7 +6,7 @@ const HomePage = () => {
       {/* Giant background text */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
         <span className="font-mono text-[18vw] font-bold tracking-tighter text-foreground opacity-[0.03] blur-[1px] uppercase">
-          PRIYANKA
+          GOUTHAM
         </span>
       </div>
 
