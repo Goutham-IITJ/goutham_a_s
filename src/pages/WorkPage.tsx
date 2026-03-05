@@ -39,12 +39,12 @@ const WorkPage = () => {
             transition={{ duration: 0.5, delay: 0.2 + i * 0.15 }}
             onMouseEnter={() => setHovered(project.num)}
             onMouseLeave={() => setHovered(null)}
-            className="border border-border p-8 md:p-10 glow-border transition-all duration-500 relative"
+            className="glass-card glow-border p-8 md:p-10 transition-all duration-500 relative"
           >
             {/* Number */}
             <span
-              className={`font-mono text-6xl md:text-8xl font-bold text-muted-foreground/10 absolute top-6 right-8 transition-transform duration-500 select-none ${
-                hovered === project.num ? "translate-x-1 -translate-y-1" : ""
+              className={`font-mono text-6xl md:text-8xl font-bold text-foreground/10 absolute top-6 right-8 transition-all duration-500 select-none ${
+                hovered === project.num ? "translate-x-1 -translate-y-1 text-foreground/20" : ""
               }`}
             >
               {project.num}
@@ -58,7 +58,7 @@ const WorkPage = () => {
                 {project.subtitle}
               </p>
 
-              <div className="mt-6 pt-4 border-t border-border">
+              <div className="mt-6 pt-4 border-t border-border/50">
                 <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase block mb-3">
                   Tools & Features
                 </span>
@@ -66,7 +66,7 @@ const WorkPage = () => {
                   {project.tools.map((tool) => (
                     <span
                       key={tool}
-                      className="font-mono text-[11px] px-3 py-1 border border-border text-muted-foreground"
+                      className="font-mono text-[11px] px-3 py-1.5 border border-border/60 text-muted-foreground rounded-md bg-accent/30"
                     >
                       {tool}
                     </span>
