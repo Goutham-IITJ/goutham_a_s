@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { Atom, Globe, Server, Code2, Cpu, Bot, Database, Paintbrush } from "lucide-react";
 
 const timeline = [
   {
@@ -15,7 +16,14 @@ const timeline = [
 ];
 
 const techStack = [
-  "React", "Next.js", "Node.js", "Python", "C++", "ROS2", "MongoDB", "Tailwind",
+  { name: "React", icon: Atom },
+  { name: "Next.js", icon: Globe },
+  { name: "Node.js", icon: Server },
+  { name: "Python", icon: Code2 },
+  { name: "C++", icon: Cpu },
+  { name: "ROS2", icon: Bot },
+  { name: "MongoDB", icon: Database },
+  { name: "Tailwind", icon: Paintbrush },
 ];
 
 const AboutPage = () => {
@@ -43,14 +51,12 @@ const AboutPage = () => {
             Experience
           </h3>
           <div className="relative pl-8">
-            {/* Timeline line */}
-            <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border" />
+            <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border/60" />
 
             {timeline.map((item, i) => (
               <div key={i} className="relative mb-12 last:mb-0">
-                {/* Node dot with glow */}
                 <div className="absolute -left-8 top-1.5 w-[15px] h-[15px] flex items-center justify-center">
-                  <div className="w-2 h-2 rounded-full bg-silver shadow-[0_0_8px_2px_hsla(0,0%,70%,0.3)]" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-foreground glow-dot" />
                 </div>
 
                 <h4 className="text-sm font-medium text-foreground leading-snug">
@@ -76,21 +82,25 @@ const AboutPage = () => {
           <h3 className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase mb-10">
             Tech Stack
           </h3>
-          <div className="grid grid-cols-2 gap-2">
-            {techStack.map((tech) => (
-              <div
-                key={tech}
-                onMouseEnter={() => setHoveredTech(tech)}
-                onMouseLeave={() => setHoveredTech(null)}
-                className={`border border-border px-4 py-3 font-mono text-xs transition-all duration-300 cursor-default ${
-                  hoveredTech === null || hoveredTech === tech
-                    ? "text-foreground border-muted-foreground/30"
-                    : "text-muted-foreground/30 border-border"
-                } ${hoveredTech === tech ? "bg-accent shadow-[0_0_12px_-4px_hsla(0,0%,100%,0.1)]" : ""}`}
-              >
-                {tech}
-              </div>
-            ))}
+          <div className="grid grid-cols-2 gap-3">
+            {techStack.map((tech) => {
+              const Icon = tech.icon;
+              return (
+                <div
+                  key={tech.name}
+                  onMouseEnter={() => setHoveredTech(tech.name)}
+                  onMouseLeave={() => setHoveredTech(null)}
+                  className={`glass-card flex items-center gap-3 px-4 py-3.5 font-mono text-xs transition-all duration-300 cursor-default ${
+                    hoveredTech === null || hoveredTech === tech.name
+                      ? "text-foreground"
+                      : "text-muted-foreground/30"
+                  } ${hoveredTech === tech.name ? "!border-foreground/20 shadow-[0_0_20px_-6px_hsla(0,0%,100%,0.15)]" : ""}`}
+                >
+                  <Icon size={18} strokeWidth={1.5} className="shrink-0 opacity-70" />
+                  {tech.name}
+                </div>
+              );
+            })}
           </div>
         </motion.div>
       </div>

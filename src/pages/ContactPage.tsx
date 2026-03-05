@@ -6,7 +6,6 @@ const ContactPage = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
   };
 
   return (
@@ -15,13 +14,13 @@ const ContactPage = () => {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.15 }}
-        className="w-full max-w-lg glassmorphic border border-border p-8 md:p-10"
+        className="w-full max-w-lg glass-card p-8 md:p-10"
       >
         {/* Terminal bar */}
-        <div className="flex items-center gap-2 mb-6 pb-4 border-b border-border">
-          <div className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
-          <div className="w-2.5 h-2.5 rounded-full bg-muted-foreground/20" />
-          <div className="w-2.5 h-2.5 rounded-full bg-muted-foreground/10" />
+        <div className="flex items-center gap-2 mb-6 pb-4 border-b border-border/40">
+          <div className="w-2.5 h-2.5 rounded-full bg-foreground/30" />
+          <div className="w-2.5 h-2.5 rounded-full bg-foreground/20" />
+          <div className="w-2.5 h-2.5 rounded-full bg-foreground/10" />
           <span className="font-mono text-[10px] text-muted-foreground ml-3 tracking-wider">
             contact.sh
           </span>
@@ -40,7 +39,7 @@ const ContactPage = () => {
               type="text"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full bg-transparent border border-border px-4 py-2.5 text-sm text-foreground font-mono outline-none focus:border-foreground transition-colors duration-300"
+              className="w-full bg-accent/30 border border-border/50 rounded-lg px-4 py-2.5 text-sm text-foreground font-mono outline-none focus:border-foreground/40 focus:shadow-[0_0_15px_-4px_hsla(0,0%,100%,0.1)] transition-all duration-300"
             />
           </div>
           <div>
@@ -51,7 +50,7 @@ const ContactPage = () => {
               type="email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="w-full bg-transparent border border-border px-4 py-2.5 text-sm text-foreground font-mono outline-none focus:border-foreground transition-colors duration-300"
+              className="w-full bg-accent/30 border border-border/50 rounded-lg px-4 py-2.5 text-sm text-foreground font-mono outline-none focus:border-foreground/40 focus:shadow-[0_0_15px_-4px_hsla(0,0%,100%,0.1)] transition-all duration-300"
             />
           </div>
           <div>
@@ -62,39 +61,28 @@ const ContactPage = () => {
               rows={4}
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
-              className="w-full bg-transparent border border-border px-4 py-2.5 text-sm text-foreground font-mono outline-none focus:border-foreground transition-colors duration-300 resize-none"
+              className="w-full bg-accent/30 border border-border/50 rounded-lg px-4 py-2.5 text-sm text-foreground font-mono outline-none focus:border-foreground/40 focus:shadow-[0_0_15px_-4px_hsla(0,0%,100%,0.1)] transition-all duration-300 resize-none"
             />
           </div>
           <button
             type="submit"
-            className="font-mono text-xs tracking-[0.2em] uppercase border border-border px-6 py-3 text-muted-foreground hover:text-foreground hover:border-foreground transition-all duration-300 w-full"
+            className="font-mono text-xs tracking-[0.2em] uppercase border border-border/50 rounded-lg px-6 py-3 text-muted-foreground hover:text-foreground hover:border-foreground/30 hover:shadow-[0_0_20px_-6px_hsla(0,0%,100%,0.12)] transition-all duration-300 w-full bg-accent/20"
           >
             Transmit
           </button>
         </form>
 
         {/* Links */}
-        <div className="mt-8 pt-4 border-t border-border flex gap-6">
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-mono text-[11px] text-muted-foreground hover:text-foreground transition-colors duration-300"
-          >
+        <div className="mt-8 pt-4 border-t border-border/40 flex gap-6">
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="font-mono text-[11px] text-muted-foreground hover:text-foreground transition-colors duration-300">
             github://
           </a>
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-mono text-[11px] text-muted-foreground hover:text-foreground transition-colors duration-300"
-          >
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="font-mono text-[11px] text-muted-foreground hover:text-foreground transition-colors duration-300">
             linkedin://
           </a>
         </div>
       </motion.div>
 
-      {/* Footer */}
       <div className="absolute bottom-6 left-0 right-0 text-center">
         <span className="font-mono text-[10px] text-muted-foreground tracking-wider">
           Designed and Engineered by Goutham// 2026

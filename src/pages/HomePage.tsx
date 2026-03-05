@@ -13,10 +13,10 @@ const HomePage = () => {
       {/* Center mounting frame */}
       <div className="flex-1 flex items-center justify-center pt-14">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="crosshair-frame border border-border aspect-video w-full max-w-2xl flex items-center justify-center"
+          className="crosshair-frame glass-card aspect-video w-full max-w-2xl flex items-center justify-center"
         >
           <span className="font-mono text-xs tracking-[0.2em] text-muted-foreground">
             REACT THREE FIBER // CANVAS MOUNT PENDING
