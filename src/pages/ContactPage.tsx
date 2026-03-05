@@ -28,7 +28,7 @@ const ContactPage = () => {
         </div>
 
         <p className="font-mono text-xs text-muted-foreground mb-8">
-          <span className="text-foreground">{">"}</span> initiate_contact --target priyanka
+          <span className="text-foreground">{">"}</span> initiate_contact --target goutham
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
