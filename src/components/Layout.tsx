@@ -22,7 +22,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <header className="fixed top-0 left-0 right-0 z-50 glassmorphic border-b border-border">
         <div className="container flex items-center justify-between h-14 px-4 sm:px-6 max-w-7xl mx-auto">
           <Link to="/" className="font-mono text-sm tracking-widest text-foreground hover:text-primary transition-colors duration-300">
-            [P_]
+          <Link to="/" className="font-mono text-lg font-bold tracking-widest text-foreground hover:text-primary transition-colors duration-300">
+            G
+          </Link>
           </Link>
 
           {/* Desktop nav */}
