@@ -10,12 +10,12 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 relative">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 relative pt-20 pb-16 sm:pt-0 sm:pb-0">
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.15 }}
-        className="w-full max-w-lg glass-card p-8 md:p-10"
+        className="w-full max-w-lg glass-card p-6 sm:p-8 md:p-10"
       >
         {/* Terminal bar */}
         <div className="flex items-center gap-2 mb-6 pb-4 border-b border-border/40">

@@ -2,26 +2,31 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Twitter, Instagram } from "lucide-react";
 import TechCanvas from '../components/TechCanvas';
 
+const socialLinks = [
+  { href: "https://github.com", icon: Github, label: "GitHub" },
+  { href: "https://linkedin.com", icon: Linkedin, label: "LinkedIn" },
+  { href: "https://x.com", icon: Twitter, label: "X" },
+  { href: "https://instagram.com", icon: Instagram, label: "Instagram" },
+];
+
 const HomePage = () => {
   return (
-    <div className="h-screen flex flex-col relative overflow-hidden bg-[#050505]">
+    <div className="h-screen flex flex-col relative overflow-hidden bg-background">
       {/* Giant background text */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0">
-        <span className="font-mono text-[18vw] font-bold tracking-tighter text-white opacity-[0.03] uppercase">
+        <span className="font-mono text-[20vw] sm:text-[18vw] font-bold tracking-tighter text-foreground opacity-[0.03] uppercase">
           GOUTHAM
         </span>
       </div>
 
       {/* Center mounting frame */}
-      <div className="flex-1 flex items-center justify-center pt-14 z-10">
+      <div className="flex-1 flex items-center justify-center pt-14 px-4 sm:px-6 z-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.97 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          // Removed glass-card, added explicit transparent background and subtle border
-          className="crosshair-frame aspect-video w-full max-w-2xl flex items-center justify-center bg-transparent border border-white/5 relative"
+          className="crosshair-frame aspect-video w-full max-w-xs sm:max-w-lg md:max-w-2xl flex items-center justify-center bg-transparent border border-foreground/5 relative"
         >
-          {/* Replaced the span with a full-width/height absolute div */}
           <div className="absolute inset-0 w-full h-full">
             <TechCanvas />
           </div>
@@ -33,12 +38,12 @@ const HomePage = () => {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.5 }}
-        className="absolute bottom-12 left-6 md:left-12 max-w-xl z-10 pointer-events-none"
+        className="absolute bottom-20 sm:bottom-12 left-4 sm:left-6 md:left-12 max-w-[85vw] sm:max-w-xl z-10 pointer-events-none"
       >
-        <h1 className="text-2xl md:text-3xl font-light tracking-tight text-white leading-tight">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-light tracking-tight text-foreground leading-tight">
           Full-Stack Developer &<br />Robotics Engineer.
         </h1>
-        <p className="mt-4 font-mono text-xs leading-relaxed text-gray-400 max-w-md">
+        <p className="mt-3 sm:mt-4 font-mono text-[10px] sm:text-xs leading-relaxed text-muted-foreground max-w-md">
           Building intelligent web platforms and autonomous systems—from React
           frontends to ROS2 navigation.
         </p>
@@ -49,23 +54,18 @@ const HomePage = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.8 }}
-        className="absolute bottom-12 right-6 md:right-12 z-10 flex gap-3"
+        className="absolute bottom-6 sm:bottom-12 right-4 sm:right-6 md:right-12 z-10 flex gap-2 sm:gap-3"
       >
-        {[
-          { href: "https://github.com", icon: <Github size={16} />, label: "GitHub" },
-          { href: "https://linkedin.com", icon: <Linkedin size={16} />, label: "LinkedIn" },
-          { href: "https://x.com", icon: <Twitter size={16} />, label: "X" },
-          { href: "https://instagram.com", icon: <Instagram size={16} />, label: "Instagram" },
-        ].map((s) => (
+        {socialLinks.map((s) => (
           <a
             key={s.label}
             href={s.href}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={s.label}
-            className="w-9 h-9 rounded-full border border-border/50 bg-accent/20 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/30 hover:shadow-[0_0_20px_-6px_hsla(0,0%,100%,0.15)] transition-all duration-300"
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-border/50 bg-accent/20 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/30 hover:shadow-[0_0_20px_-6px_hsla(0,0%,100%,0.15)] transition-all duration-300"
           >
-            {s.icon}
+            <s.icon size={14} />
           </a>
         ))}
       </motion.div>
