@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Github, Linkedin, Twitter, Instagram } from "lucide-react";
 import TechCanvas from '../components/TechCanvas';
 
 const HomePage = () => {
