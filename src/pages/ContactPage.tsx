@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { Github, Linkedin, Twitter, Instagram } from "lucide-react";
 
 const ContactPage = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });

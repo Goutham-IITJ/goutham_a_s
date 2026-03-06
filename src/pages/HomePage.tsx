@@ -44,12 +44,31 @@ const HomePage = () => {
         </p>
       </motion.div>
 
-      {/* Bottom right version tag */}
-      <div className="absolute bottom-12 right-6 md:right-12 z-10 pointer-events-none">
-        <span className="font-mono text-[10px] text-gray-500 tracking-widest">
-          v2026.03
-        </span>
-      </div>
+      {/* Bottom right social icons */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+        className="absolute bottom-12 right-6 md:right-12 z-10 flex gap-3"
+      >
+        {[
+          { href: "https://github.com", icon: <Github size={16} />, label: "GitHub" },
+          { href: "https://linkedin.com", icon: <Linkedin size={16} />, label: "LinkedIn" },
+          { href: "https://x.com", icon: <Twitter size={16} />, label: "X" },
+          { href: "https://instagram.com", icon: <Instagram size={16} />, label: "Instagram" },
+        ].map((s) => (
+          <a
+            key={s.label}
+            href={s.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={s.label}
+            className="w-9 h-9 rounded-full border border-border/50 bg-accent/20 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/30 hover:shadow-[0_0_20px_-6px_hsla(0,0%,100%,0.15)] transition-all duration-300"
+          >
+            {s.icon}
+          </a>
+        ))}
+      </motion.div>
     </div>
   );
 };
