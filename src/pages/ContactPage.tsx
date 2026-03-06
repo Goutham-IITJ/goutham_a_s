@@ -10,7 +10,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 relative">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 relative pt-20 pb-16 sm:pt-0 sm:pb-0">
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
