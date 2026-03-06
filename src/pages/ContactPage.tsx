@@ -15,7 +15,7 @@ const ContactPage = () => {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.15 }}
-        className="w-full max-w-lg glass-card p-8 md:p-10"
+        className="w-full max-w-lg glass-card p-6 sm:p-8 md:p-10"
       >
         {/* Terminal bar */}
         <div className="flex items-center gap-2 mb-6 pb-4 border-b border-border/40">

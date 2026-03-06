@@ -82,7 +82,7 @@ const AboutPage = () => {
           <h3 className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase mb-10">
             Tech Stack
           </h3>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-2 gap-2 sm:gap-3">
             {techStack.map((tech) => {
               const Icon = tech.icon;
               return (
