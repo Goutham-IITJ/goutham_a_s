@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { Github, Linkedin, Twitter, Instagram } from "lucide-react";
 
 const ContactPage = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -72,14 +73,25 @@ const ContactPage = () => {
           </button>
         </form>
 
-        {/* Links */}
-        <div className="mt-8 pt-4 border-t border-border/40 flex gap-6">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="font-mono text-[11px] text-muted-foreground hover:text-foreground transition-colors duration-300">
-            github://
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="font-mono text-[11px] text-muted-foreground hover:text-foreground transition-colors duration-300">
-            linkedin://
-          </a>
+        {/* Social Icons */}
+        <div className="mt-8 pt-4 border-t border-border/40 flex gap-4">
+          {[
+            { href: "https://github.com", icon: <Github size={18} />, label: "GitHub" },
+            { href: "https://linkedin.com", icon: <Linkedin size={18} />, label: "LinkedIn" },
+            { href: "https://x.com", icon: <Twitter size={18} />, label: "X" },
+            { href: "https://instagram.com", icon: <Instagram size={18} />, label: "Instagram" },
+          ].map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={s.label}
+              className="w-10 h-10 rounded-full border border-border/50 bg-accent/20 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/30 hover:shadow-[0_0_20px_-6px_hsla(0,0%,100%,0.15)] transition-all duration-300"
+            >
+              {s.icon}
+            </a>
+          ))}
         </div>
       </motion.div>
 
