@@ -274,6 +274,7 @@ const WorkPage = () => {
                         />
                       </div>
                     )}
+                  </div>
 
                   {/* Expanded content */}
                   <motion.div
