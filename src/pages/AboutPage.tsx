@@ -47,15 +47,37 @@ const timeline: TimelineItem[] = [
   },
 ];
 
-const techStack = [
-  { name: "React", icon: Atom },
-  { name: "Next.js", icon: Globe },
-  { name: "Node.js", icon: Server },
-  { name: "Python", icon: Code2 },
-  { name: "C++", icon: Cpu },
-  { name: "ROS2", icon: Bot },
-  { name: "MongoDB", icon: Database },
-  { name: "Tailwind", icon: Paintbrush },
+const techCategories = [
+  {
+    label: "Languages",
+    icon: Braces,
+    items: ["C/C++", "Python", "JavaScript", "SQL"],
+  },
+  {
+    label: "Web & Backend",
+    icon: Globe,
+    items: ["React", "Node.js", "Express.js", "JWT", "REST APIs", "Tailwind CSS"],
+  },
+  {
+    label: "Data & Visualization",
+    icon: BarChart3,
+    items: ["NumPy", "Pandas", "Matplotlib", "Plotly"],
+  },
+  {
+    label: "Databases & Cloud",
+    icon: Cloud,
+    items: ["MongoDB", "Firebase", "GCP", "Cloud Functions", "Vertex AI"],
+  },
+  {
+    label: "Robotics & Simulation",
+    icon: Bot,
+    items: ["ROS2", "Gazebo", "TurtleBot", "Git", "Linux", "SolidWorks"],
+  },
+  {
+    label: "Application & UI",
+    icon: Layout,
+    items: ["Plotly Dashboards", "Tailwind CSS", "Event-driven Programming"],
+  },
 ];
 
 const AboutPage = () => {
