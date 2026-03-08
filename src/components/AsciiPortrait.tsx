@@ -6,7 +6,7 @@ const ROWS = 44;
 const DOT_SIZE = 3;
 const GAP = 1;
 const REPEL_RADIUS = 50;
-const REPEL_STRENGTH = 12;
+const REPEL_STRENGTH = 18;
 
 export default function AsciiPortrait() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
