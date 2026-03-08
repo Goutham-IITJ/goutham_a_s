@@ -178,9 +178,9 @@ const AboutPage = () => {
             </h2>
 
             {/* Two-column: Experience left, stats/info right */}
-            <div className="grid lg:grid-cols-5 gap-10 lg:gap-16 mb-16">
-              {/* Experience — takes 3 cols */}
-              <div className="lg:col-span-3">
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 mb-16">
+              {/* Experience */}
+              <div>
                 <h3 className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase mb-8">
                   Experience
                 </h3>
@@ -273,7 +273,7 @@ const AboutPage = () => {
               </div>
 
               {/* Right column — ASCII portrait */}
-              <div className="lg:col-span-2 flex flex-col gap-4">
+              <div className="flex flex-col gap-4">
                 <AsciiPortrait />
               </div>
             </div>
