@@ -12,6 +12,8 @@ export default function AsciiPortrait() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animRef = useRef<number>(0);
   const mouseRef = useRef<{ x: number; y: number; active: boolean }>({ x: -999, y: -999, active: false });
+  // Store per-dot velocity for physics simulation
+  const dotsRef = useRef<{ vx: number; vy: number; ox: number; oy: number }[]>([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
