@@ -269,11 +269,11 @@ const WorkPage = () => {
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="mt-6 pt-5 border-t border-border/30">
-                      <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase block mb-3">
+                    <div className="mt-4 pt-4 border-t border-border/30">
+                      <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase block mb-2">
                         Key Highlights
                       </span>
-                      <ul className="space-y-1.5 mb-6">
+                      <ul className="space-y-1 mb-4">
                         {project.highlights.map((h, idx) => (
                           <li key={idx} className="text-sm text-muted-foreground flex gap-2">
                             <span className="text-foreground/40 mt-0.5">→</span>
@@ -285,12 +285,12 @@ const WorkPage = () => {
                   </motion.div>
 
                   {/* Tools */}
-                  <div className="mt-5 pt-4 border-t border-border/30">
-                    <div className="flex flex-wrap gap-2">
+                  <div className="mt-4 pt-3 border-t border-border/30">
+                    <div className="flex flex-wrap gap-1.5">
                       {project.tools.map((tool) => (
                         <span
                           key={tool}
-                          className="font-mono text-[10px] px-2.5 py-1 border border-border/60 text-muted-foreground rounded bg-accent/30"
+                          className="font-mono text-[10px] px-2 py-0.5 border border-border/60 text-muted-foreground rounded bg-accent/30"
                         >
                           {tool}
                         </span>
@@ -299,7 +299,7 @@ const WorkPage = () => {
                   </div>
 
                   {/* Expand hint */}
-                  <div className="mt-4 flex items-center gap-1.5">
+                  <div className="mt-3 flex items-center gap-1.5">
                     <span className="font-mono text-[10px] text-muted-foreground/60 group-hover:text-muted-foreground transition-colors">
                       {isExpanded ? "click to collapse" : "click to expand"}
                     </span>
