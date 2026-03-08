@@ -1,9 +1,8 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useState, useRef, lazy, Suspense } from "react";
+import { useState, useRef } from "react";
 import { Globe, Bot, ChevronDown, Github, Braces, BarChart3, Cloud, Layout } from "lucide-react";
 import aboutHero from "@/assets/about-hero.jpeg";
 import AsciiPortrait from "@/components/AsciiPortrait";
-const TechGlobe = lazy(() => import("@/components/TechGlobe"));
 
 interface TimelineItem {
   title: string;
