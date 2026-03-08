@@ -260,13 +260,13 @@ const WorkPage = () => {
                     </span>
                   </div>
 
-                  {/* Description + Cover Image */}
-                  <div className="flex flex-col sm:flex-row gap-5 mt-5">
-                    <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+                  {/* Description + Cover Image — split remaining width */}
+                  <div className="flex flex-col sm:flex-row gap-6 mt-5">
+                    <p className="text-sm text-muted-foreground leading-relaxed flex-1 min-w-0">
                       {project.description}
                     </p>
                     {project.image && (
-                      <div className="shrink-0 w-full sm:w-40 h-28 rounded-lg border border-border/30 bg-accent/20 overflow-hidden">
+                      <div className="shrink-0 w-full sm:w-52 h-32 rounded-lg border border-border/30 bg-accent/20 overflow-hidden">
                         <img
                           src={project.image}
                           alt={`${project.title} cover`}
