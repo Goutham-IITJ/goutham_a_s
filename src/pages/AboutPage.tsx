@@ -351,6 +351,7 @@ const AboutPage = () => {
                 {[
                   {
                     icon: Cpu,
+                    cover: "",
                     title: "Electronic Subsystem Coordinator",
                     org: "Robotics Society",
                     sub: "IIT Jodhpur",
@@ -363,6 +364,7 @@ const AboutPage = () => {
                   },
                   {
                     icon: PenTool,
+                    cover: "",
                     title: "Design Coordinator",
                     org: "Office of Placement and Training",
                     sub: "IIT Jodhpur",
@@ -374,6 +376,7 @@ const AboutPage = () => {
                   },
                   {
                     icon: Palette,
+                    cover: "",
                     title: "Joint Secretary",
                     org: "Fine Arts Society",
                     sub: "IIT Jodhpur",
@@ -386,6 +389,7 @@ const AboutPage = () => {
                   },
                   {
                     icon: Users,
+                    cover: "",
                     title: "Associate",
                     org: "Product Club",
                     sub: "IIT Jodhpur",
