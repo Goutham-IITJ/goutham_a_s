@@ -60,6 +60,7 @@ const techStack = [
 
 const AboutPage = () => {
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
+  const [expandedExp, setExpandedExp] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
