@@ -351,6 +351,7 @@ const AboutPage = () => {
                 {[
                   {
                     icon: Cpu,
+                    cover: "",
                     title: "Electronic Subsystem Coordinator",
                     org: "Robotics Society",
                     sub: "IIT Jodhpur",
@@ -363,6 +364,7 @@ const AboutPage = () => {
                   },
                   {
                     icon: PenTool,
+                    cover: "",
                     title: "Design Coordinator",
                     org: "Office of Placement and Training",
                     sub: "IIT Jodhpur",
@@ -374,6 +376,7 @@ const AboutPage = () => {
                   },
                   {
                     icon: Palette,
+                    cover: "",
                     title: "Joint Secretary",
                     org: "Fine Arts Society",
                     sub: "IIT Jodhpur",
@@ -386,6 +389,7 @@ const AboutPage = () => {
                   },
                   {
                     icon: Users,
+                    cover: "",
                     title: "Associate",
                     org: "Product Club",
                     sub: "IIT Jodhpur",
@@ -404,8 +408,17 @@ const AboutPage = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.1, duration: 0.5 }}
-                      className="glass-card p-5 group hover:!border-foreground/20 hover:shadow-[0_0_30px_-8px_hsla(0,0%,100%,0.1)] transition-all duration-300"
+                      className="glass-card overflow-hidden group hover:!border-foreground/20 hover:shadow-[0_0_30px_-8px_hsla(0,0%,100%,0.1)] transition-all duration-300"
                     >
+                      {/* Cover image area */}
+                      <div className="w-full h-32 bg-muted/30 border-b border-border/40 flex items-center justify-center overflow-hidden">
+                        {pos.cover ? (
+                          <img src={pos.cover} alt={pos.title} className="w-full h-full object-cover" />
+                        ) : (
+                          <PosIcon size={28} strokeWidth={1} className="text-muted-foreground/30" />
+                        )}
+                      </div>
+                      <div className="p-5">
                       <div className="flex items-center gap-3 mb-3">
                         <div className="w-9 h-9 rounded-full border border-border/60 flex items-center justify-center group-hover:border-foreground/30 group-hover:shadow-[0_0_15px_-5px_hsla(0,0%,100%,0.15)] transition-all duration-300">
                           <PosIcon size={16} strokeWidth={1.5} className="text-muted-foreground group-hover:text-foreground transition-colors duration-300" />
@@ -426,6 +439,7 @@ const AboutPage = () => {
                           </li>
                         ))}
                       </ul>
+                      </div>
                     </motion.div>
                   );
                 })}
