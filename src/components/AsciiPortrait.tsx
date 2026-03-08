@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
-const COLS = 48;
-const ROWS = 32;
-const DOT_SIZE = 4;
-const GAP = 2;
+const COLS = 64;
+const ROWS = 44;
+const DOT_SIZE = 3;
+const GAP = 1;
 
 export default function AsciiPortrait() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
