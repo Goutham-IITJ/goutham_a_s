@@ -161,23 +161,74 @@ const AboutPage = () => {
                 <div className="relative pl-8">
                   <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border/60" />
 
-                  {timeline.map((item, i) => (
-                    <div key={i} className="relative mb-12 last:mb-0">
-                      <div className="absolute -left-8 top-1.5 w-[15px] h-[15px] flex items-center justify-center">
-                        <div className="w-2.5 h-2.5 rounded-full bg-foreground glow-dot" />
-                      </div>
+                  {timeline.map((item, i) => {
+                    const isExpanded = expandedExp === i;
+                    const isClickable = item.expandable;
+                    return (
+                      <div key={i} className="relative mb-10 last:mb-0">
+                        <div className="absolute -left-8 top-1.5 w-[15px] h-[15px] flex items-center justify-center">
+                          <div className={`w-2.5 h-2.5 rounded-full transition-colors duration-300 ${isExpanded ? "bg-foreground glow-dot" : "bg-foreground glow-dot"}`} />
+                        </div>
 
-                      <h4 className="text-sm font-medium text-foreground leading-snug">
-                        {item.title}
-                      </h4>
-                      <span className="font-mono text-[11px] text-muted-foreground mt-1 block">
-                        @ {item.org}
-                      </span>
-                      <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </div>
-                  ))}
+                        <div
+                          onClick={() => isClickable && setExpandedExp(isExpanded ? null : i)}
+                          className={`glass-card p-4 transition-all duration-300 ${isClickable ? "cursor-pointer hover:!border-foreground/20 hover:shadow-[0_0_20px_-6px_hsla(0,0%,100%,0.12)]" : ""} ${isExpanded ? "!border-foreground/15 shadow-[0_0_25px_-6px_hsla(0,0%,100%,0.1)]" : ""}`}
+                        >
+                          <div className="flex items-start justify-between gap-2">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2">
+                                <h4 className="text-sm font-medium text-foreground leading-snug">
+                                  {item.title}
+                                </h4>
+                                {item.github && <Github size={13} className="text-muted-foreground shrink-0" />}
+                              </div>
+                              <span className="font-mono text-[11px] text-muted-foreground mt-1 block">
+                                @ {item.org}
+                              </span>
+                              <span className="font-mono text-[10px] text-muted-foreground/60 mt-0.5 block">
+                                {item.period}
+                              </span>
+                            </div>
+                            {isClickable && (
+                              <motion.div
+                                animate={{ rotate: isExpanded ? 180 : 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="mt-1 shrink-0"
+                              >
+                                <ChevronDown size={14} className="text-muted-foreground" />
+                              </motion.div>
+                            )}
+                          </div>
+
+                          <AnimatePresence>
+                            {isExpanded && item.details && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.35, ease: "easeInOut" }}
+                                className="overflow-hidden"
+                              >
+                                <ul className="mt-4 space-y-3 border-t border-border/40 pt-4">
+                                  {item.details.map((detail, j) => (
+                                    <motion.li
+                                      key={j}
+                                      initial={{ opacity: 0, x: -8 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: j * 0.1, duration: 0.3 }}
+                                      className="text-xs text-muted-foreground leading-relaxed pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-foreground/40"
+                                    >
+                                      {detail}
+                                    </motion.li>
+                                  ))}
+                                </ul>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
