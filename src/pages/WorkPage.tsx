@@ -18,6 +18,9 @@ const projects = [
     ],
     tools: ["Gemini 1.5 Flash", "Python", "Google Wallet API", "SQL", "LangChain", "Pandas"],
     category: "ai",
+    image: "/placeholder.svg",
+    github: "",
+    live: "",
   },
   {
     num: "02",
@@ -34,6 +37,9 @@ const projects = [
     ],
     tools: ["ROS2", "Gazebo", "YOLOv8", "TD3/PPO", "MongoDB", "SLAM"],
     category: "robotics",
+    image: "/placeholder.svg",
+    github: "",
+    live: "",
   },
   {
     num: "03",
@@ -50,6 +56,9 @@ const projects = [
     ],
     tools: ["MongoDB", "Express.js", "React", "Node.js", "JWT", "Tailwind CSS", "Razorpay"],
     category: "web",
+    image: "/placeholder.svg",
+    github: "",
+    live: "",
   },
   {
     num: "04",
@@ -66,6 +75,9 @@ const projects = [
     ],
     tools: ["Python", "OpenCV", "CNN", "Bi-LSTM", "GloVe", "NLP"],
     category: "ai",
+    image: "/placeholder.svg",
+    github: "",
+    live: "",
   },
   {
     num: "05",
@@ -82,6 +94,9 @@ const projects = [
     ],
     tools: ["Python", "scikit-learn", "XGBoost", "TensorFlow", "NumPy", "Pandas"],
     category: "ai",
+    image: "/placeholder.svg",
+    github: "",
+    live: "",
   },
   {
     num: "06",
@@ -98,6 +113,9 @@ const projects = [
     ],
     tools: ["Arduino", "GSM (SIM800L)", "GPS (NEO-6M)", "Embedded C"],
     category: "embedded",
+    image: "/placeholder.svg",
+    github: "",
+    live: "",
   },
 ];
 
