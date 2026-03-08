@@ -91,7 +91,7 @@ const AboutPage = () => {
               >
                 Hi, I'm <span className="text-foreground font-medium">Goutham A S</span>
               </motion.p>
-              </motion.h1>
+            </div>
             </div>
           </div>
 
