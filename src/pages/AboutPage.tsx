@@ -278,21 +278,68 @@ const AboutPage = () => {
               </div>
             </div>
 
-            {/* Technical Skills — 3D Globe */}
+            {/* Technical Skills — interactive category filter + flowing pills */}
             <div>
-              <h3 className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase mb-4">
+              <h3 className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase mb-8">
                 Technical Skills
               </h3>
-              <p className="font-mono text-[9px] text-muted-foreground/50 mb-2 tracking-wider">
-                drag to rotate
-              </p>
-              <Suspense fallback={
-                <div className="w-full h-[450px] flex items-center justify-center">
-                  <span className="font-mono text-[10px] text-muted-foreground animate-pulse">Loading...</span>
-                </div>
-              }>
-                <TechGlobe />
-              </Suspense>
+
+              {/* Category tabs */}
+              <div className="flex flex-wrap gap-2 mb-8">
+                <button
+                  onClick={() => setActiveCategory(null)}
+                  className={`font-mono text-[10px] tracking-wider uppercase px-3.5 py-2 rounded-lg border transition-all duration-300 ${
+                    activeCategory === null
+                      ? "border-foreground/30 text-foreground bg-foreground/5 shadow-[0_0_15px_-5px_hsla(0,0%,100%,0.15)]"
+                      : "border-border/50 text-muted-foreground hover:text-foreground hover:border-foreground/20"
+                  }`}
+                >
+                  All
+                </button>
+                {techCategories.map((cat) => {
+                  const CatIcon = cat.icon;
+                  const isActive = activeCategory === cat.label;
+                  return (
+                    <button
+                      key={cat.label}
+                      onClick={() => setActiveCategory(isActive ? null : cat.label)}
+                      className={`font-mono text-[10px] tracking-wider uppercase px-3.5 py-2 rounded-lg border flex items-center gap-1.5 transition-all duration-300 ${
+                        isActive
+                          ? "border-foreground/30 text-foreground bg-foreground/5 shadow-[0_0_15px_-5px_hsla(0,0%,100%,0.15)]"
+                          : "border-border/50 text-muted-foreground hover:text-foreground hover:border-foreground/20"
+                      }`}
+                    >
+                      <CatIcon size={12} strokeWidth={1.5} />
+                      {cat.label}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Skill pills — animated layout */}
+              <motion.div layout className="flex flex-wrap gap-2">
+                <AnimatePresence mode="popLayout">
+                  {(activeCategory === null ? allSkills : activeCatItems).map((skill) => (
+                    <motion.span
+                      key={skill}
+                      layout
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      transition={{ duration: 0.25 }}
+                      onMouseEnter={() => setHoveredTech(skill)}
+                      onMouseLeave={() => setHoveredTech(null)}
+                      className={`font-mono text-[11px] px-4 py-2 rounded-full border cursor-default transition-all duration-300 ${
+                        hoveredTech === null || hoveredTech === skill
+                          ? "text-foreground border-border/60 hover:border-foreground/30 hover:shadow-[0_0_20px_-6px_hsla(0,0%,100%,0.12)] hover:bg-foreground/5"
+                          : "text-muted-foreground/30 border-border/20"
+                      }`}
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
+                </AnimatePresence>
+              </motion.div>
             </div>
           </div>
         </motion.div>
