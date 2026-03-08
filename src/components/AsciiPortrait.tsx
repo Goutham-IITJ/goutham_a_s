@@ -172,7 +172,7 @@ export default function AsciiPortrait() {
       <div className="absolute inset-0 pointer-events-none opacity-30 bg-[repeating-linear-gradient(0deg,transparent,transparent_1px,hsl(var(--foreground)/0.03)_1px,hsl(var(--foreground)/0.03)_2px)]" />
 
       <p className="font-mono text-[8px] text-muted-foreground/40 mt-3 text-center tracking-widest uppercase">
-        wave interference
+        singularity
       </p>
     </motion.div>
   );
