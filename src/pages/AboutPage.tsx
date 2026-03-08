@@ -92,7 +92,6 @@ const AboutPage = () => {
                 Hi, I'm <span className="text-foreground font-medium">Goutham A S</span>
               </motion.p>
             </div>
-            </div>
           </div>
 
           {/* Scroll hint */}
