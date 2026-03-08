@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Code2, Cpu, Shield, ShoppingCart, Eye, Zap } from "lucide-react";
+import { Code2, Cpu, Shield, ShoppingCart, Eye, Zap, Github, ExternalLink } from "lucide-react";
 
 const projects = [
   {
