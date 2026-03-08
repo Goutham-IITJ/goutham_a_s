@@ -273,7 +273,7 @@ const AboutPage = () => {
               </div>
 
               {/* Right column — ASCII portrait */}
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 lg:mt-10">
                 <AsciiPortrait />
               </div>
             </div>
