@@ -341,6 +341,96 @@ const AboutPage = () => {
                 </AnimatePresence>
               </motion.div>
             </div>
+
+            {/* Leadership & Positions */}
+            <div className="mt-20">
+              <h3 className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase mb-8">
+                Leadership & Positions
+              </h3>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  {
+                    icon: Cpu,
+                    title: "Electronic Subsystem Coordinator",
+                    org: "Robotics Society",
+                    sub: "IIT Jodhpur",
+                    period: "Aug 2025 – Present",
+                    points: [
+                      "Leading electronic subsystem design and integration",
+                      "Coordinate sensor and actuator integration across teams",
+                      "Ensure reliability in field tests and competitions",
+                    ],
+                  },
+                  {
+                    icon: PenTool,
+                    title: "Design Coordinator",
+                    org: "Office of Placement and Training",
+                    sub: "IIT Jodhpur",
+                    period: "Aug 2025 – Present",
+                    points: [
+                      "Lead design workshops",
+                      "Coordinate with placement teams for presentation assets",
+                    ],
+                  },
+                  {
+                    icon: Palette,
+                    title: "Joint Secretary",
+                    org: "Fine Arts Society",
+                    sub: "IIT Jodhpur",
+                    period: "2024",
+                    points: [
+                      "Organized cultural events and exhibitions",
+                      "Managed artist collaborations and budgets",
+                      "Led outreach initiatives across campus",
+                    ],
+                  },
+                  {
+                    icon: Users,
+                    title: "Associate",
+                    org: "Product Club",
+                    sub: "IIT Jodhpur",
+                    period: "2024",
+                    points: [
+                      "Participated in product management workshops",
+                      "Collaborated on product development initiatives",
+                      "Contributed to winning Pitch Rush Hackathon project",
+                    ],
+                  },
+                ].map((pos, i) => {
+                  const PosIcon = pos.icon;
+                  return (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.1, duration: 0.5 }}
+                      className="glass-card p-5 group hover:!border-foreground/20 hover:shadow-[0_0_30px_-8px_hsla(0,0%,100%,0.1)] transition-all duration-300"
+                    >
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-9 h-9 rounded-full border border-border/60 flex items-center justify-center group-hover:border-foreground/30 group-hover:shadow-[0_0_15px_-5px_hsla(0,0%,100%,0.15)] transition-all duration-300">
+                          <PosIcon size={16} strokeWidth={1.5} className="text-muted-foreground group-hover:text-foreground transition-colors duration-300" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-sm font-medium text-foreground leading-snug">{pos.title}</h4>
+                          <p className="font-mono text-[11px] text-muted-foreground">{pos.org}</p>
+                          <p className="font-mono text-[10px] text-muted-foreground/50">{pos.sub}</p>
+                        </div>
+                      </div>
+                      <span className="inline-block font-mono text-[10px] tracking-wider text-muted-foreground border border-border/60 rounded px-2 py-0.5 mb-3">
+                        {pos.period}
+                      </span>
+                      <ul className="space-y-2">
+                        {pos.points.map((pt, j) => (
+                          <li key={j} className="text-xs text-muted-foreground leading-relaxed pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-foreground/30">
+                            {pt}
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
