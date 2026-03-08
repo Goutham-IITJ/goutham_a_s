@@ -1,18 +1,49 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useState, useRef } from "react";
-import { Atom, Globe, Server, Code2, Cpu, Bot, Database, Paintbrush } from "lucide-react";
+import { Atom, Globe, Server, Code2, Cpu, Bot, Database, Paintbrush, ChevronDown, Github } from "lucide-react";
 import aboutHero from "@/assets/about-hero.jpeg";
 
-const timeline = [
+interface TimelineItem {
+  title: string;
+  org: string;
+  period: string;
+  desc: string;
+  details?: string[];
+  expandable?: boolean;
+  github?: boolean;
+}
+
+const timeline: TimelineItem[] = [
   {
     title: "Bash/CLI Developer Intern",
     org: "AfterQuery (YC W25)",
+    period: "Aug 2025 – Nov 2025",
     desc: "Developed test suites and benchmarked LLMs.",
+    expandable: true,
+    github: true,
+    details: [
+      "Generated 20+ high-complexity DevOps/SRE scenarios using Kubernetes and Docker to benchmark frontier LLMs, improving LLM performance.",
+      "Conducted deterministic Python test suites (Pytest) for CLI tasks, achieving 100% reproducibility against Oracle agents while adhering to quality standards (input validation, error handling).",
+    ],
+  },
+  {
+    title: "Inter IIT Tech Meet 13.0",
+    org: "Kalyani Bharat Forge, Autonomous Swarm Navigation",
+    period: "Dec 2024 – Dec 2024",
+    desc: "Built centralized software for robot swarm navigation.",
+    expandable: true,
+    github: true,
+    details: [
+      "Built a centralized software for robot swarm navigation, achieving a 35% reduction in path-finding latency in unknown, unpredictable environments through TD3 & PPO path-planning algorithms.",
+      "Pioneered a dual-layered architecture for 10+ robots by integrating YOLOv8 and RL with MongoDB-based communication, achieving higher obstacle avoidance accuracy across 50+ Gazebo simulations.",
+    ],
   },
   {
     title: "B.Tech Electrical Engineering",
     org: "IIT Jodhpur",
+    period: "Expected 2027",
     desc: "Expected 2027.",
+    expandable: false,
   },
 ];
 
