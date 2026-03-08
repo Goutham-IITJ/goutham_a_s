@@ -1,148 +1,88 @@
-import { useState, useEffect, useCallback } from "react";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
-// High-detail ASCII eye art inspired by the reference
-const EYE_ART = [
-  "                                                            ",
-  "                          .::::::.                          ",
-  "                    .::////////////////::.                   ",
-  "                .:////////////////////////////:.             ",
-  "             .://////////////////////////////////.          ",
-  "           .://///...:///////////////.:...:////////.         ",
-  "         .://///       .://////////:.       :///////.       ",
-  "        .:////          .:///////:           .//////:.      ",
-  "       .://///       @@@@@@@@@@@@@@@@@@       ://////:.     ",
-  "      .://////     @@@@@@@@@@@@@@@@@@@@@@     :///////:.    ",
-  "     .:///////    @@@@@@@  ######  @@@@@@@    :////////:.   ",
-  "    .:////////   @@@@@@ ##########  @@@@@@   ://///////:.   ",
-  "    ://///////   @@@@@ ############  @@@@@   ://////////:.  ",
-  "   .://///////   @@@@@ ####  ###### @@@@@   .://////////:.  ",
-  "   .://///////   @@@@@ ####  ###### @@@@@   .://////////:.  ",
-  "    ://///////   @@@@@ ############  @@@@@   ://////////:.  ",
-  "    .:////////   @@@@@@ ##########  @@@@@@   ://///////:.   ",
-  "     .:///////    @@@@@@@  ######  @@@@@@@    :////////:.   ",
-  "      .://////     @@@@@@@@@@@@@@@@@@@@@@     :///////:.    ",
-  "       .://///       @@@@@@@@@@@@@@@@@@       ://////:.     ",
-  "        .:////          .:///////:           .//////:.      ",
-  "         .://///       .://////////:.       :///////.       ",
-  "           .://///...:///////////////.:...:////////.         ",
-  "             .://////////////////////////////////.          ",
-  "                .:////////////////////////////:.             ",
-  "                    .::////////////////::.                   ",
-  "                          .::::::.                          ",
-  "                                                            ",
-  "           G  O  U  T  H  A  M     A     S                 ",
-  "           ─────────────────────────────                    ",
-  "           d e v e l o p e r  .  b u i l d e r             ",
-  "                                                            ",
-];
-
-const GLITCH_CHARS = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`░▒▓█▀▄■□▪▫";
-
-function glitchLine(line: string, intensity: number): string {
-  return line
-    .split("")
-    .map((ch) => {
-      if (ch === " " || ch === "\n") return ch;
-      return Math.random() < intensity
-        ? GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)]
-        : ch;
-    })
-    .join("");
-}
+const COLS = 48;
+const ROWS = 32;
+const DOT_SIZE = 4;
+const GAP = 2;
 
 export default function AsciiPortrait() {
-  const [isHovered, setIsHovered] = useState(false);
-  const [displayLines, setDisplayLines] = useState<string[]>([]);
-  const [glitchIntensity, setGlitchIntensity] = useState(0);
-  const [revealed, setRevealed] = useState(0);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animRef = useRef<number>(0);
 
-  // Reveal animation on mount
   useEffect(() => {
-    let frame = 0;
-    const total = EYE_ART.length;
-    const interval = setInterval(() => {
-      frame += 1;
-      setRevealed(Math.min(frame, total));
-      if (frame >= total) {
-        clearInterval(interval);
-        setDisplayLines(EYE_ART);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const w = COLS * (DOT_SIZE + GAP);
+    const h = ROWS * (DOT_SIZE + GAP);
+    canvas.width = w;
+    canvas.height = h;
+
+    let time = 0;
+
+    const draw = () => {
+      ctx.fillStyle = "hsl(0, 0%, 0%)";
+      ctx.fillRect(0, 0, w, h);
+
+      for (let row = 0; row < ROWS; row++) {
+        for (let col = 0; col < COLS; col++) {
+          const x = col * (DOT_SIZE + GAP);
+          const y = row * (DOT_SIZE + GAP);
+
+          // Multiple overlapping sine waves
+          const wave1 = Math.sin(col * 0.15 + time * 0.8 + row * 0.05) * 0.5;
+          const wave2 = Math.sin(col * 0.08 - time * 0.6 + row * 0.12) * 0.4;
+          const wave3 = Math.sin((col + row) * 0.1 + time * 0.4) * 0.3;
+          const wave4 = Math.cos(row * 0.2 - time * 0.5 + col * 0.06) * 0.3;
+
+          const combined = wave1 + wave2 + wave3 + wave4;
+          const norm = (combined + 1.5) / 3; // normalize to ~0-1
+
+          // Threshold to create dot pattern (not gradient)
+          if (norm > 0.45) {
+            const alpha = Math.min(1, (norm - 0.45) * 3);
+            // Size varies slightly
+            const size = DOT_SIZE * (0.6 + alpha * 0.4);
+            ctx.fillStyle = `rgba(255, 255, 255, ${0.5 + alpha * 0.5})`;
+            ctx.fillRect(
+              x + (DOT_SIZE - size) / 2,
+              y + (DOT_SIZE - size) / 2,
+              size,
+              size
+            );
+          }
+        }
       }
-    }, 50);
-    return () => clearInterval(interval);
-  }, []);
 
-  // Glitch on hover
-  const runGlitch = useCallback(() => {
-    if (!isHovered) return;
-    const intensity = 0.1 + Math.random() * 0.2;
-    setGlitchIntensity(intensity);
-    setDisplayLines(EYE_ART.map((l) => glitchLine(l, intensity)));
-  }, [isHovered]);
-
-  useEffect(() => {
-    if (!isHovered) {
-      setDisplayLines(EYE_ART);
-      setGlitchIntensity(0);
-      return;
-    }
-    const interval = setInterval(runGlitch, 70);
-    const timeout = setTimeout(() => {
-      clearInterval(interval);
-      setDisplayLines(EYE_ART);
-      setGlitchIntensity(0);
-    }, 700);
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout);
+      time += 0.03;
+      animRef.current = requestAnimationFrame(draw);
     };
-  }, [isHovered, runGlitch]);
 
-  const visibleLines = displayLines.length > 0
-    ? displayLines.slice(0, revealed)
-    : EYE_ART.slice(0, revealed);
+    draw();
+    return () => cancelAnimationFrame(animRef.current);
+  }, []);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4, duration: 0.6 }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       className="glass-card p-6 cursor-crosshair select-none relative overflow-hidden group flex flex-col items-center justify-center"
     >
-      <pre
-        className="font-mono text-[6px] sm:text-[7px] md:text-[8px] leading-[1.3] text-muted-foreground transition-colors duration-200 group-hover:text-foreground/90 whitespace-pre"
-        style={{
-          textShadow:
-            glitchIntensity > 0
-              ? `${glitchIntensity * 3}px 0 hsl(var(--primary) / 0.4), -${glitchIntensity * 2}px 0 hsl(var(--destructive) / 0.3)`
-              : "none",
-        }}
-      >
-        {visibleLines.map((line, i) => (
-          <motion.div
-            key={i}
-            animate={
-              glitchIntensity > 0
-                ? { x: (Math.random() - 0.5) * glitchIntensity * 15 }
-                : { x: 0 }
-            }
-            transition={{ duration: 0.04 }}
-          >
-            {line}
-          </motion.div>
-        ))}
-      </pre>
+      <canvas
+        ref={canvasRef}
+        className="w-full h-auto"
+        style={{ imageRendering: "pixelated" }}
+      />
 
       {/* Scanline overlay */}
-      <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[repeating-linear-gradient(0deg,transparent,transparent_1px,hsl(var(--foreground)/0.04)_1px,hsl(var(--foreground)/0.04)_2px)]" />
-
-      {/* CRT vignette */}
-      <div className="absolute inset-0 pointer-events-none rounded-lg bg-[radial-gradient(ellipse_at_center,transparent_60%,hsl(var(--background)/0.6)_100%)]" />
+      <div className="absolute inset-0 pointer-events-none opacity-30 bg-[repeating-linear-gradient(0deg,transparent,transparent_1px,hsl(var(--foreground)/0.03)_1px,hsl(var(--foreground)/0.03)_2px)]" />
 
       <p className="font-mono text-[8px] text-muted-foreground/40 mt-3 text-center tracking-widest uppercase">
-        hover to glitch
+        wave interference
       </p>
     </motion.div>
   );
