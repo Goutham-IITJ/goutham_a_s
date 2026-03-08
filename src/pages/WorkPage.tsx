@@ -1,20 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { ExternalLink, Briefcase, Code2, Cpu, Shield, ShoppingCart, Eye, Zap } from "lucide-react";
-
-const experience = [
-  {
-    role: "Bash/CLI Developer Intern",
-    company: "AfterQuery",
-    badge: "YC W25",
-    period: "Aug 2025 – Nov 2025",
-    bullets: [
-      "Generated 20+ high-complexity DevOps/SRE scenarios using Kubernetes and Docker to benchmark frontier LLMs.",
-      "Conducted deterministic Python test suites (Pytest) for CLI tasks, achieving 100% reproducibility against Oracle agents.",
-    ],
-    tools: ["Kubernetes", "Docker", "Python", "Pytest"],
-  },
-];
+import { Code2, Cpu, Shield, ShoppingCart, Eye, Zap } from "lucide-react";
 
 const projects = [
   {
