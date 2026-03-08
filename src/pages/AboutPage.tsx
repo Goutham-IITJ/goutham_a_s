@@ -66,7 +66,15 @@ const AboutPage = () => {
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                className="font-mono text-xs sm:text-sm text-muted-foreground mb-3 tracking-wide"
+              >
+                Hi, I'm <span className="text-foreground font-medium">Goutham A S</span>
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.6 }}
                 className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-muted-foreground uppercase mb-2 sm:mb-3"
               >
                 // About Me
@@ -74,7 +82,7 @@ const AboutPage = () => {
               <motion.h1
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
+                transition={{ delay: 0.7, duration: 0.6 }}
                 className="text-2xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight tracking-tight"
               >
                 Building at the
@@ -83,14 +91,6 @@ const AboutPage = () => {
                 <br />
                 <span className="text-muted-foreground">code & curiosity.</span>
               </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-                className="font-mono text-xs sm:text-sm text-muted-foreground mt-3 tracking-wide"
-              >
-                Hi, I'm <span className="text-foreground font-medium">Goutham A S</span>
-              </motion.p>
             </div>
           </div>
 
