@@ -247,16 +247,16 @@ const WorkPage = () => {
                     </span>
                   </div>
 
-                  {/* Description + Cover Image */}
+                  {/* Cover Image + Description */}
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <p className="text-sm text-muted-foreground leading-relaxed flex-1 min-w-0">
-                      {project.description}
-                    </p>
                     {project.image && (
-                      <div className="shrink-0 w-full sm:w-44 sm:h-[100px] rounded-lg border border-border/30 bg-accent/20 overflow-hidden self-start">
+                      <div className="shrink-0 w-full sm:w-36 sm:h-24 rounded-lg border border-border/30 bg-accent/20 overflow-hidden self-start">
                         <img src={project.image} alt={`${project.title} cover`} className="w-full h-full object-cover" />
                       </div>
                     )}
+                    <p className="text-[13px] text-muted-foreground leading-[1.85] flex-1 min-w-0 sm:max-w-[65%]">
+                      {project.description}
+                    </p>
                   </div>
 
                   {/* Expanded content */}
