@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useState, useRef } from "react";
-import { Atom, Globe, Server, Code2, Cpu, Bot, Database, Paintbrush, ChevronDown, Github, Braces, BarChart3, Cloud, Wrench, Layout } from "lucide-react";
+import { Globe, Bot, ChevronDown, Github, Braces, BarChart3, Cloud, Layout } from "lucide-react";
 import aboutHero from "@/assets/about-hero.jpeg";
 
 interface TimelineItem {
@@ -80,8 +80,12 @@ const techCategories = [
   },
 ];
 
+// Flatten all skills for the interactive hover effect
+const allSkills = techCategories.flatMap((cat) => cat.items);
+
 const AboutPage = () => {
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [expandedExp, setExpandedExp] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -90,16 +94,17 @@ const AboutPage = () => {
     offset: ["start start", "end end"],
   });
 
-  // Content panel slides from bottom (100%) to top (0%) as user scrolls
   const panelY = useTransform(scrollYProgress, [0.1, 0.55], ["100vh", "0vh"]);
   const panelOpacity = useTransform(scrollYProgress, [0.1, 0.4], [0, 1]);
-  // Hero image subtly scales and fades
   const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.08]);
   const heroOpacity = useTransform(scrollYProgress, [0.3, 0.55], [1, 0.3]);
 
+  const activeCatItems = activeCategory
+    ? techCategories.find((c) => c.label === activeCategory)?.items ?? []
+    : [];
+
   return (
     <div ref={containerRef} className="relative h-[250vh] bg-background">
-      {/* Sticky wrapper that holds both layers */}
       <div className="sticky top-0 h-screen overflow-hidden">
         {/* Hero image layer */}
         <motion.div
@@ -112,10 +117,8 @@ const AboutPage = () => {
               alt="About me"
               className="w-full h-full object-cover"
             />
-            {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
 
-            {/* Text on top of card */}
             <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
@@ -148,7 +151,6 @@ const AboutPage = () => {
             </div>
           </div>
 
-          {/* Scroll hint */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -170,125 +172,196 @@ const AboutPage = () => {
           className="absolute inset-0 bg-background pt-20 sm:pt-24 pb-16 px-6 md:px-12 overflow-y-auto"
         >
           <div className="max-w-6xl mx-auto">
-            <h2 className="font-mono text-xs tracking-[0.3em] text-muted-foreground uppercase mb-16">
+            <h2 className="font-mono text-xs tracking-[0.3em] text-muted-foreground uppercase mb-12">
               // About
             </h2>
 
-            {/* Experience — full width */}
-            <div className="mb-20">
-              <h3 className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase mb-10">
-                Experience
-              </h3>
-              <div className="relative pl-8 max-w-2xl">
-                <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border/60" />
+            {/* Two-column: Experience left, stats/info right */}
+            <div className="grid lg:grid-cols-5 gap-10 lg:gap-16 mb-16">
+              {/* Experience — takes 3 cols */}
+              <div className="lg:col-span-3">
+                <h3 className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase mb-8">
+                  Experience
+                </h3>
+                <div className="relative pl-8">
+                  <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border/60" />
 
-                {timeline.map((item, i) => {
-                  const isExpanded = expandedExp === i;
-                  const isClickable = item.expandable;
-                  return (
-                    <div key={i} className="relative mb-10 last:mb-0">
-                      <div className="absolute -left-8 top-1.5 w-[15px] h-[15px] flex items-center justify-center">
-                        <div className="w-2.5 h-2.5 rounded-full bg-foreground glow-dot" />
-                      </div>
-
-                      <div
-                        onClick={() => isClickable && setExpandedExp(isExpanded ? null : i)}
-                        className={`glass-card p-4 transition-all duration-300 ${isClickable ? "cursor-pointer hover:!border-foreground/20 hover:shadow-[0_0_20px_-6px_hsla(0,0%,100%,0.12)]" : ""} ${isExpanded ? "!border-foreground/15 shadow-[0_0_25px_-6px_hsla(0,0%,100%,0.1)]" : ""}`}
+                  {timeline.map((item, i) => {
+                    const isExpanded = expandedExp === i;
+                    const isClickable = item.expandable;
+                    return (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.12, duration: 0.5 }}
+                        className="relative mb-6 last:mb-0"
                       >
-                        <div className="flex items-start justify-between gap-2">
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2">
-                              <h4 className="text-sm font-medium text-foreground leading-snug">
-                                {item.title}
-                              </h4>
-                              {item.github && <Github size={13} className="text-muted-foreground shrink-0" />}
-                            </div>
-                            <span className="font-mono text-[11px] text-muted-foreground mt-1 block">
-                              @ {item.org}
-                            </span>
-                            <span className="font-mono text-[10px] text-muted-foreground/60 mt-0.5 block">
-                              {item.period}
-                            </span>
-                          </div>
-                          {isClickable && (
-                            <motion.div
-                              animate={{ rotate: isExpanded ? 180 : 0 }}
-                              transition={{ duration: 0.3 }}
-                              className="mt-1 shrink-0"
-                            >
-                              <ChevronDown size={14} className="text-muted-foreground" />
-                            </motion.div>
-                          )}
+                        <div className="absolute -left-8 top-5 w-[15px] h-[15px] flex items-center justify-center">
+                          <motion.div
+                            animate={isExpanded ? { scale: [1, 1.4, 1] } : { scale: 1 }}
+                            transition={{ duration: 0.4 }}
+                            className="w-2.5 h-2.5 rounded-full bg-foreground glow-dot"
+                          />
                         </div>
 
-                        <AnimatePresence>
-                          {isExpanded && item.details && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.35, ease: "easeInOut" }}
-                              className="overflow-hidden"
-                            >
-                              <ul className="mt-4 space-y-3 border-t border-border/40 pt-4">
-                                {item.details.map((detail, j) => (
-                                  <motion.li
-                                    key={j}
-                                    initial={{ opacity: 0, x: -8 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: j * 0.1, duration: 0.3 }}
-                                    className="text-xs text-muted-foreground leading-relaxed pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-foreground/40"
-                                  >
-                                    {detail}
-                                  </motion.li>
-                                ))}
-                              </ul>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    </div>
-                  );
-                })}
+                        <div
+                          onClick={() => isClickable && setExpandedExp(isExpanded ? null : i)}
+                          className={`glass-card p-5 transition-all duration-300 ${
+                            isClickable ? "cursor-pointer hover:!border-foreground/20 hover:shadow-[0_0_30px_-8px_hsla(0,0%,100%,0.12)]" : ""
+                          } ${isExpanded ? "!border-foreground/15 shadow-[0_0_30px_-6px_hsla(0,0%,100%,0.1)]" : ""}`}
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <h4 className="text-sm font-medium text-foreground leading-snug">
+                                  {item.title}
+                                </h4>
+                                {item.github && (
+                                  <Github size={13} className="text-muted-foreground/60 hover:text-foreground transition-colors duration-200 shrink-0" />
+                                )}
+                              </div>
+                              <span className="font-mono text-[11px] text-muted-foreground mt-1.5 block">
+                                @ {item.org}
+                              </span>
+                              <span className="font-mono text-[10px] text-muted-foreground/50 mt-0.5 block">
+                                {item.period}
+                              </span>
+                            </div>
+                            {isClickable && (
+                              <motion.div
+                                animate={{ rotate: isExpanded ? 180 : 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="mt-1 shrink-0"
+                              >
+                                <ChevronDown size={14} className="text-muted-foreground" />
+                              </motion.div>
+                            )}
+                          </div>
+
+                          <AnimatePresence>
+                            {isExpanded && item.details && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.35, ease: "easeInOut" }}
+                                className="overflow-hidden"
+                              >
+                                <ul className="mt-4 space-y-3 border-t border-border/40 pt-4">
+                                  {item.details.map((detail, j) => (
+                                    <motion.li
+                                      key={j}
+                                      initial={{ opacity: 0, x: -10 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: j * 0.1, duration: 0.3 }}
+                                      className="text-xs text-muted-foreground leading-relaxed pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-foreground/40"
+                                    >
+                                      {detail}
+                                    </motion.li>
+                                  ))}
+                                </ul>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Right column — quick stats */}
+              <div className="lg:col-span-2 flex flex-col gap-4">
+                <h3 className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase mb-4">
+                  Quick Glance
+                </h3>
+                {[
+                  { label: "Focus", value: "Full-Stack & Robotics" },
+                  { label: "University", value: "IIT Jodhpur" },
+                  { label: "Graduation", value: "2027" },
+                  { label: "Location", value: "India" },
+                ].map((stat, i) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 + i * 0.08, duration: 0.4 }}
+                    className="glass-card px-5 py-4 flex items-center justify-between group hover:!border-foreground/15 transition-all duration-300"
+                  >
+                    <span className="font-mono text-[10px] tracking-wider text-muted-foreground uppercase">
+                      {stat.label}
+                    </span>
+                    <span className="font-mono text-xs text-foreground group-hover:text-foreground transition-colors">
+                      {stat.value}
+                    </span>
+                  </motion.div>
+                ))}
               </div>
             </div>
 
-            {/* Technical Skills — categorized */}
+            {/* Technical Skills — interactive category filter + flowing pills */}
             <div>
-              <h3 className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase mb-10">
+              <h3 className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase mb-8">
                 Technical Skills
               </h3>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {techCategories.map((cat, i) => {
+
+              {/* Category tabs */}
+              <div className="flex flex-wrap gap-2 mb-8">
+                <button
+                  onClick={() => setActiveCategory(null)}
+                  className={`font-mono text-[10px] tracking-wider uppercase px-3.5 py-2 rounded-lg border transition-all duration-300 ${
+                    activeCategory === null
+                      ? "border-foreground/30 text-foreground bg-foreground/5 shadow-[0_0_15px_-5px_hsla(0,0%,100%,0.15)]"
+                      : "border-border/50 text-muted-foreground hover:text-foreground hover:border-foreground/20"
+                  }`}
+                >
+                  All
+                </button>
+                {techCategories.map((cat) => {
                   const CatIcon = cat.icon;
+                  const isActive = activeCategory === cat.label;
                   return (
-                    <motion.div
+                    <button
                       key={cat.label}
-                      initial={{ opacity: 0, y: 16 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.08, duration: 0.4 }}
-                      className="glass-card p-5 group hover:!border-foreground/15 hover:shadow-[0_0_25px_-8px_hsla(0,0%,100%,0.1)] transition-all duration-300"
+                      onClick={() => setActiveCategory(isActive ? null : cat.label)}
+                      className={`font-mono text-[10px] tracking-wider uppercase px-3.5 py-2 rounded-lg border flex items-center gap-1.5 transition-all duration-300 ${
+                        isActive
+                          ? "border-foreground/30 text-foreground bg-foreground/5 shadow-[0_0_15px_-5px_hsla(0,0%,100%,0.15)]"
+                          : "border-border/50 text-muted-foreground hover:text-foreground hover:border-foreground/20"
+                      }`}
                     >
-                      <div className="flex items-center gap-2.5 mb-4">
-                        <CatIcon size={15} strokeWidth={1.5} className="text-muted-foreground group-hover:text-foreground transition-colors duration-300" />
-                        <span className="font-mono text-[11px] tracking-wider text-muted-foreground group-hover:text-foreground transition-colors duration-300 uppercase">
-                          {cat.label}
-                        </span>
-                      </div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {cat.items.map((skill) => (
-                          <span
-                            key={skill}
-                            className="font-mono text-[10px] px-2.5 py-1 rounded-full border border-border/50 text-muted-foreground hover:text-foreground hover:border-foreground/25 transition-all duration-200 cursor-default"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </motion.div>
+                      <CatIcon size={12} strokeWidth={1.5} />
+                      {cat.label}
+                    </button>
                   );
                 })}
               </div>
+
+              {/* Skill pills — animated layout */}
+              <motion.div layout className="flex flex-wrap gap-2">
+                <AnimatePresence mode="popLayout">
+                  {(activeCategory === null ? allSkills : activeCatItems).map((skill) => (
+                    <motion.span
+                      key={skill}
+                      layout
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      transition={{ duration: 0.25 }}
+                      onMouseEnter={() => setHoveredTech(skill)}
+                      onMouseLeave={() => setHoveredTech(null)}
+                      className={`font-mono text-[11px] px-4 py-2 rounded-full border cursor-default transition-all duration-300 ${
+                        hoveredTech === null || hoveredTech === skill
+                          ? "text-foreground border-border/60 hover:border-foreground/30 hover:shadow-[0_0_20px_-6px_hsla(0,0%,100%,0.12)] hover:bg-foreground/5"
+                          : "text-muted-foreground/30 border-border/20"
+                      }`}
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
+                </AnimatePresence>
+              </motion.div>
             </div>
           </div>
         </motion.div>
