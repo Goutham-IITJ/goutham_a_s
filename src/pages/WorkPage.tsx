@@ -138,65 +138,6 @@ const WorkPage = () => {
         </p>
       </motion.div>
 
-      {/* Experience Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className="mb-20"
-      >
-        <div className="flex items-center gap-3 mb-6">
-          <Briefcase size={16} className="text-muted-foreground" />
-          <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase">
-            Experience
-          </span>
-        </div>
-
-        {experience.map((exp) => (
-          <div
-            key={exp.company}
-            className="glass-card glow-border p-8 md:p-10"
-          >
-            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
-              <div>
-                <h3 className="text-lg md:text-xl font-light text-foreground tracking-tight">
-                  {exp.role}
-                </h3>
-                <div className="flex items-center gap-2 mt-1">
-                  <span className="text-sm text-muted-foreground">{exp.company}</span>
-                  <span className="font-mono text-[10px] px-2 py-0.5 border border-border/60 text-accent-foreground rounded bg-accent/50">
-                    {exp.badge}
-                  </span>
-                </div>
-              </div>
-              <span className="font-mono text-[11px] text-muted-foreground shrink-0">
-                {exp.period}
-              </span>
-            </div>
-
-            <ul className="space-y-2 mb-6">
-              {exp.bullets.map((b, i) => (
-                <li key={i} className="text-sm text-muted-foreground leading-relaxed flex gap-2">
-                  <span className="text-foreground/30 mt-1 shrink-0">›</span>
-                  {b}
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex flex-wrap gap-2">
-              {exp.tools.map((tool) => (
-                <span
-                  key={tool}
-                  className="font-mono text-[10px] px-2.5 py-1 border border-border/60 text-muted-foreground rounded bg-accent/30"
-                >
-                  {tool}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))}
-      </motion.div>
-
       {/* Projects Section */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
