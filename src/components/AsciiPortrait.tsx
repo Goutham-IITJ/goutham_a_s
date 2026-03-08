@@ -126,13 +126,8 @@ export default function AsciiPortrait() {
             const alpha = Math.min(1, (norm - 0.15) * 2.5);
             const size = DOT_SIZE * (0.4 + alpha * 0.6);
 
-            // Color: warm orange/white near center, cooler blue far out
-            const warmth = Math.max(0, 1 - normDist * 2.5);
-            const r = Math.round(255 * (0.6 + warmth * 0.4));
-            const g = Math.round(255 * (0.4 + warmth * 0.3) * alpha);
-            const b = Math.round(255 * (0.3 + (1 - warmth) * 0.5) * alpha);
-
-            ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${0.4 + alpha * 0.6})`;
+            const brightness = Math.round(255 * alpha);
+            ctx.fillStyle = `rgba(${brightness}, ${brightness}, ${brightness}, ${0.4 + alpha * 0.6})`;
             ctx.fillRect(
               x + (DOT_SIZE - size) / 2,
               y + (DOT_SIZE - size) / 2,
