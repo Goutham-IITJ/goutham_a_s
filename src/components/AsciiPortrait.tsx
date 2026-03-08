@@ -98,14 +98,19 @@ export default function AsciiPortrait() {
           const x = baseX + dot.ox;
           const y = baseY + dot.oy;
 
-          // Multiple overlapping sine waves
-          const wave1 = Math.sin(col * 0.15 + time * 0.8 + row * 0.05) * 0.5;
-          const wave2 = Math.sin(col * 0.08 - time * 0.6 + row * 0.12) * 0.4;
-          const wave3 = Math.sin((col + row) * 0.1 + time * 0.4) * 0.3;
-          const wave4 = Math.cos(row * 0.2 - time * 0.5 + col * 0.06) * 0.3;
+          // Layered waves with varying frequencies and speeds
+          const wave1 = Math.sin(col * 0.15 + time * 0.8 + row * 0.05) * 0.4;
+          const wave2 = Math.sin(col * 0.08 - time * 0.6 + row * 0.12) * 0.35;
+          const wave3 = Math.sin((col + row) * 0.1 + time * 0.4) * 0.25;
+          const wave4 = Math.cos(row * 0.2 - time * 0.5 + col * 0.06) * 0.25;
+          // High-frequency detail
+          const wave5 = Math.sin(col * 0.25 + row * 0.18 - time * 1.1) * 0.15;
+          const wave6 = Math.cos(col * 0.04 + row * 0.22 + time * 0.3) * 0.2;
+          // Slow drifting modulation to break repetition
+          const mod = Math.sin(col * 0.03 + time * 0.12) * Math.cos(row * 0.04 - time * 0.08);
 
-          const combined = wave1 + wave2 + wave3 + wave4;
-          const norm = (combined + 1.5) / 3;
+          const combined = wave1 + wave2 + wave3 + wave4 + wave5 + wave6 + mod * 0.35;
+          const norm = (combined + 2) / 4;
 
           if (norm > 0.45) {
             const alpha = Math.min(1, (norm - 0.45) * 3);
