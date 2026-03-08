@@ -61,6 +61,9 @@ export default function AsciiPortrait() {
       ctx.fillRect(0, 0, w, h);
 
       const { x: mx, y: my, active } = mouseRef.current;
+      const cx = w / 2;
+      const cy = h / 2;
+      const maxR = Math.sqrt(cx * cx + cy * cy);
 
       for (let row = 0; row < ROWS; row++) {
         for (let col = 0; col < COLS; col++) {
@@ -69,53 +72,67 @@ export default function AsciiPortrait() {
           const baseX = col * (DOT_SIZE + GAP);
           const baseY = row * (DOT_SIZE + GAP);
 
-          // Apply repulsion force
+          // Mouse repulsion
           if (active) {
             const dx = baseX + dot.ox - mx;
             const dy = baseY + dot.oy - my;
             const distSq = dx * dx + dy * dy;
             const dist = Math.sqrt(distSq);
-
             if (dist < REPEL_RADIUS && dist > 0.1) {
-              const force = REPEL_STRENGTH / (distSq + 50); // inverse-square falloff
+              const force = REPEL_STRENGTH / (distSq + 50);
               dot.vx += (dx / dist) * force;
               dot.vy += (dy / dist) * force;
             }
           }
 
-          // Spring back to origin
           dot.vx -= dot.ox * SPRING;
           dot.vy -= dot.oy * SPRING;
-
-          // Friction
           dot.vx *= FRICTION;
           dot.vy *= FRICTION;
-
-          // Integrate
           dot.ox += dot.vx;
           dot.oy += dot.vy;
 
           const x = baseX + dot.ox;
           const y = baseY + dot.oy;
 
-          // Layered waves with varying frequencies and speeds
-          const wave1 = Math.sin(col * 0.15 + time * 0.8 + row * 0.05) * 0.4;
-          const wave2 = Math.sin(col * 0.08 - time * 0.6 + row * 0.12) * 0.35;
-          const wave3 = Math.sin((col + row) * 0.1 + time * 0.4) * 0.25;
-          const wave4 = Math.cos(row * 0.2 - time * 0.5 + col * 0.06) * 0.25;
-          // High-frequency detail
-          const wave5 = Math.sin(col * 0.25 + row * 0.18 - time * 1.1) * 0.15;
-          const wave6 = Math.cos(col * 0.04 + row * 0.22 + time * 0.3) * 0.2;
-          // Slow drifting modulation to break repetition
-          const mod = Math.sin(col * 0.03 + time * 0.12) * Math.cos(row * 0.04 - time * 0.08);
+          // Black hole math
+          const dx = baseX - cx;
+          const dy = baseY - cy;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const normDist = dist / maxR;
+          const angle = Math.atan2(dy, dx);
 
-          const combined = wave1 + wave2 + wave3 + wave4 + wave5 + wave6 + mod * 0.35;
-          const norm = (combined + 2) / 4;
+          // Event horizon — dark void in center
+          const eventHorizon = 0.08;
+          if (normDist < eventHorizon) continue;
 
-          if (norm > 0.45) {
-            const alpha = Math.min(1, (norm - 0.45) * 3);
-            const size = DOT_SIZE * (0.6 + alpha * 0.4);
-            ctx.fillStyle = `rgba(255, 255, 255, ${0.5 + alpha * 0.5})`;
+          // Accretion disk — spiral arms
+          const spiralAngle = angle + Math.log(normDist + 0.01) * 3.5 - time * 0.8;
+          const spiral1 = Math.sin(spiralAngle * 2) * 0.5;
+          const spiral2 = Math.sin(spiralAngle * 3 + 1.5) * 0.3;
+          const spiral3 = Math.cos(spiralAngle * 1.5 - 0.8) * 0.25;
+
+          // Radial glow — brighter near center, fading out
+          const radialFade = Math.exp(-normDist * 2.5) * 1.2;
+          // Disk thickness — narrow band around center
+          const diskThickness = Math.exp(-Math.pow((normDist - 0.25) * 4, 2)) * 0.6;
+          // Turbulence
+          const turb = Math.sin(dist * 0.3 + time * 1.2) * Math.cos(angle * 5 - time * 0.5) * 0.15;
+
+          const combined = (spiral1 + spiral2 + spiral3) * radialFade + diskThickness + turb;
+          const norm = Math.max(0, Math.min(1, combined));
+
+          if (norm > 0.15) {
+            const alpha = Math.min(1, (norm - 0.15) * 2.5);
+            const size = DOT_SIZE * (0.4 + alpha * 0.6);
+
+            // Color: warm orange/white near center, cooler blue far out
+            const warmth = Math.max(0, 1 - normDist * 2.5);
+            const r = Math.round(255 * (0.6 + warmth * 0.4));
+            const g = Math.round(255 * (0.4 + warmth * 0.3) * alpha);
+            const b = Math.round(255 * (0.3 + (1 - warmth) * 0.5) * alpha);
+
+            ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${0.4 + alpha * 0.6})`;
             ctx.fillRect(
               x + (DOT_SIZE - size) / 2,
               y + (DOT_SIZE - size) / 2,
