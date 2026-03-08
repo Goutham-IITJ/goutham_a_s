@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Code2, Cpu, Shield, ShoppingCart, Eye, Zap, Github, ExternalLink } from "lucide-react";
+import { Code2, Cpu, Shield, ShoppingCart, Eye, Zap } from "lucide-react";
 
 const projects = [
   {
@@ -18,9 +18,6 @@ const projects = [
     ],
     tools: ["Gemini 1.5 Flash", "Python", "Google Wallet API", "SQL", "LangChain", "Pandas"],
     category: "ai",
-    image: "/placeholder.svg",
-    github: "",
-    live: "",
   },
   {
     num: "02",
@@ -37,9 +34,6 @@ const projects = [
     ],
     tools: ["ROS2", "Gazebo", "YOLOv8", "TD3/PPO", "MongoDB", "SLAM"],
     category: "robotics",
-    image: "/placeholder.svg",
-    github: "",
-    live: "",
   },
   {
     num: "03",
@@ -56,9 +50,6 @@ const projects = [
     ],
     tools: ["MongoDB", "Express.js", "React", "Node.js", "JWT", "Tailwind CSS", "Razorpay"],
     category: "web",
-    image: "/placeholder.svg",
-    github: "",
-    live: "",
   },
   {
     num: "04",
@@ -75,9 +66,6 @@ const projects = [
     ],
     tools: ["Python", "OpenCV", "CNN", "Bi-LSTM", "GloVe", "NLP"],
     category: "ai",
-    image: "/placeholder.svg",
-    github: "",
-    live: "",
   },
   {
     num: "05",
@@ -94,9 +82,6 @@ const projects = [
     ],
     tools: ["Python", "scikit-learn", "XGBoost", "TensorFlow", "NumPy", "Pandas"],
     category: "ai",
-    image: "/placeholder.svg",
-    github: "",
-    live: "",
   },
   {
     num: "06",
@@ -113,9 +98,6 @@ const projects = [
     ],
     tools: ["Arduino", "GSM (SIM800L)", "GPS (NEO-6M)", "Embedded C"],
     category: "embedded",
-    image: "/placeholder.svg",
-    github: "",
-    live: "",
   },
 ];
 
@@ -203,11 +185,11 @@ const WorkPage = () => {
                 onMouseEnter={() => setHovered(project.num)}
                 onMouseLeave={() => setHovered(null)}
                 onClick={() => setExpandedProject(isExpanded ? null : project.num)}
-                className="glass-card glow-border p-6 md:p-8 cursor-pointer transition-all duration-500 relative overflow-hidden group"
+                className="glass-card glow-border p-8 md:p-10 cursor-pointer transition-all duration-500 relative overflow-hidden group"
               >
                 {/* Background number */}
                 <span
-                  className={`font-mono text-7xl md:text-8xl font-bold text-foreground/[0.04] absolute -top-2 right-4 md:right-6 transition-all duration-700 select-none ${
+                  className={`font-mono text-7xl md:text-9xl font-bold text-foreground/[0.04] absolute -top-2 right-4 md:right-8 transition-all duration-700 select-none ${
                     hovered === project.num ? "text-foreground/[0.08] scale-105" : ""
                   }`}
                 >
@@ -215,29 +197,17 @@ const WorkPage = () => {
                 </span>
 
                 <div className="relative z-10">
-                  {/* Top row: icon, title+links, period */}
-                  <div className="flex items-start justify-between gap-3 mb-4">
+                  {/* Top row */}
+                  <div className="flex items-start justify-between gap-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-7 h-7 rounded-md border border-border/50 bg-accent/40 flex items-center justify-center shrink-0">
-                        <Icon size={14} className="text-muted-foreground" />
+                      <div className="w-8 h-8 rounded-md border border-border/50 bg-accent/40 flex items-center justify-center">
+                        <Icon size={15} className="text-muted-foreground" />
                       </div>
                       <div>
-                        <div className="flex items-center gap-2">
-                          <h3 className="text-base md:text-lg font-light text-foreground tracking-tight">
-                            {project.title}
-                          </h3>
-                          {project.github && (
-                            <a href={project.github} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="w-6 h-6 rounded border border-border/50 bg-accent/30 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all">
-                              <Github size={12} />
-                            </a>
-                          )}
-                          {project.live && (
-                            <a href={project.live} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="w-6 h-6 rounded border border-border/50 bg-accent/30 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all">
-                              <ExternalLink size={12} />
-                            </a>
-                          )}
-                        </div>
-                        <p className="text-[11px] text-muted-foreground mt-0.5">
+                        <h3 className="text-lg md:text-xl font-light text-foreground tracking-tight">
+                          {project.title}
+                        </h3>
+                        <p className="text-xs text-muted-foreground mt-0.5">
                           {project.subtitle}
                         </p>
                       </div>
@@ -247,17 +217,10 @@ const WorkPage = () => {
                     </span>
                   </div>
 
-                  {/* Cover Image + Description */}
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    {project.image && (
-                      <div className="shrink-0 w-full sm:w-36 sm:h-24 rounded-lg border border-border/30 bg-accent/20 overflow-hidden self-start">
-                        <img src={project.image} alt={`${project.title} cover`} className="w-full h-full object-cover" />
-                      </div>
-                    )}
-                    <p className="text-[13px] text-muted-foreground leading-[1.85] flex-1 min-w-0 sm:max-w-[65%]">
-                      {project.description}
-                    </p>
-                  </div>
+                  {/* Description — always visible */}
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-5 max-w-2xl">
+                    {project.description}
+                  </p>
 
                   {/* Expanded content */}
                   <motion.div
@@ -269,11 +232,11 @@ const WorkPage = () => {
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="mt-4 pt-4 border-t border-border/30">
-                      <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase block mb-2">
+                    <div className="mt-6 pt-5 border-t border-border/30">
+                      <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase block mb-3">
                         Key Highlights
                       </span>
-                      <ul className="space-y-1 mb-4">
+                      <ul className="space-y-1.5 mb-6">
                         {project.highlights.map((h, idx) => (
                           <li key={idx} className="text-sm text-muted-foreground flex gap-2">
                             <span className="text-foreground/40 mt-0.5">→</span>
@@ -285,12 +248,12 @@ const WorkPage = () => {
                   </motion.div>
 
                   {/* Tools */}
-                  <div className="mt-4 pt-3 border-t border-border/30">
-                    <div className="flex flex-wrap gap-1.5">
+                  <div className="mt-5 pt-4 border-t border-border/30">
+                    <div className="flex flex-wrap gap-2">
                       {project.tools.map((tool) => (
                         <span
                           key={tool}
-                          className="font-mono text-[10px] px-2 py-0.5 border border-border/60 text-muted-foreground rounded bg-accent/30"
+                          className="font-mono text-[10px] px-2.5 py-1 border border-border/60 text-muted-foreground rounded bg-accent/30"
                         >
                           {tool}
                         </span>
@@ -299,7 +262,7 @@ const WorkPage = () => {
                   </div>
 
                   {/* Expand hint */}
-                  <div className="mt-3 flex items-center gap-1.5">
+                  <div className="mt-4 flex items-center gap-1.5">
                     <span className="font-mono text-[10px] text-muted-foreground/60 group-hover:text-muted-foreground transition-colors">
                       {isExpanded ? "click to collapse" : "click to expand"}
                     </span>
