@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useState, useRef } from "react";
-import { Atom, Globe, Server, Code2, Cpu, Bot, Database, Paintbrush, ChevronDown, Github } from "lucide-react";
+import { Atom, Globe, Server, Code2, Cpu, Bot, Database, Paintbrush, ChevronDown, Github, Braces, BarChart3, Cloud, Wrench, Layout } from "lucide-react";
 import aboutHero from "@/assets/about-hero.jpeg";
 
 interface TimelineItem {
