@@ -143,7 +143,7 @@ export default function AsciiPortrait() {
         }
       }
 
-      time += 0.03;
+      time += 0.012;
       animRef.current = requestAnimationFrame(draw);
     };
 
