@@ -83,6 +83,14 @@ const AboutPage = () => {
                 <br />
                 <span className="text-muted-foreground">code & curiosity.</span>
               </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.6 }}
+                className="font-mono text-xs sm:text-sm text-muted-foreground mt-3 tracking-wide"
+              >
+                Hi, I'm <span className="text-foreground font-medium">Goutham A S</span>
+              </motion.p>
             </div>
           </div>
 
