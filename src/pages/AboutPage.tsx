@@ -274,9 +274,6 @@ const AboutPage = () => {
 
               {/* Right column — ASCII portrait */}
               <div className="lg:col-span-2 flex flex-col gap-4">
-                <h3 className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase mb-4">
-                  Identity
-                </h3>
                 <AsciiPortrait />
               </div>
             </div>
