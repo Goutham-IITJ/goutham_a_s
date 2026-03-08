@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { useState, useRef } from "react";
 import { Globe, Bot, ChevronDown, Github, Braces, BarChart3, Cloud, Layout } from "lucide-react";
 import aboutHero from "@/assets/about-hero.jpeg";
+import AsciiPortrait from "@/components/AsciiPortrait";
 
 interface TimelineItem {
   title: string;
@@ -271,32 +272,12 @@ const AboutPage = () => {
                 </div>
               </div>
 
-              {/* Right column — quick stats */}
+              {/* Right column — ASCII portrait */}
               <div className="lg:col-span-2 flex flex-col gap-4">
                 <h3 className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase mb-4">
-                  Quick Glance
+                  Identity
                 </h3>
-                {[
-                  { label: "Focus", value: "Full-Stack & Robotics" },
-                  { label: "University", value: "IIT Jodhpur" },
-                  { label: "Graduation", value: "2027" },
-                  { label: "Location", value: "India" },
-                ].map((stat, i) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 + i * 0.08, duration: 0.4 }}
-                    className="glass-card px-5 py-4 flex items-center justify-between group hover:!border-foreground/15 transition-all duration-300"
-                  >
-                    <span className="font-mono text-[10px] tracking-wider text-muted-foreground uppercase">
-                      {stat.label}
-                    </span>
-                    <span className="font-mono text-xs text-foreground group-hover:text-foreground transition-colors">
-                      {stat.value}
-                    </span>
-                  </motion.div>
-                ))}
+                <AsciiPortrait />
               </div>
             </div>
 
