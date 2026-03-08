@@ -229,16 +229,51 @@ const WorkPage = () => {
                           {project.subtitle}
                         </p>
                       </div>
+                      {/* GitHub & Live links */}
+                      <div className="flex items-center gap-2 ml-2">
+                        {project.github && (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="w-7 h-7 rounded-md border border-border/50 bg-accent/30 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all"
+                          >
+                            <Github size={14} />
+                          </a>
+                        )}
+                        {project.live && (
+                          <a
+                            href={project.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="w-7 h-7 rounded-md border border-border/50 bg-accent/30 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all"
+                          >
+                            <ExternalLink size={14} />
+                          </a>
+                        )}
+                      </div>
                     </div>
                     <span className="font-mono text-[11px] text-muted-foreground shrink-0 hidden sm:block">
                       {project.period}
                     </span>
                   </div>
 
-                  {/* Description — always visible */}
-                  <p className="text-sm text-muted-foreground leading-relaxed mt-5 max-w-2xl">
-                    {project.description}
-                  </p>
+                  {/* Description + Cover Image */}
+                  <div className="flex flex-col sm:flex-row gap-5 mt-5">
+                    <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+                      {project.description}
+                    </p>
+                    {project.image && (
+                      <div className="shrink-0 w-full sm:w-40 h-28 rounded-lg border border-border/30 bg-accent/20 overflow-hidden">
+                        <img
+                          src={project.image}
+                          alt={`${project.title} cover`}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    )}
 
                   {/* Expanded content */}
                   <motion.div
