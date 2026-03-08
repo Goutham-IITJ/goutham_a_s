@@ -24,7 +24,7 @@ function fibonacciSphere(count: number, radius: number) {
 }
 
 function WireframeShell() {
-  const meshRef = useRef<THREE.Mesh>(null);
+  const meshRef = useRef<THREE.Group>(null);
   useFrame((_, delta) => {
     if (meshRef.current) {
       meshRef.current.rotation.x += delta * 0.02;
@@ -32,10 +32,16 @@ function WireframeShell() {
     }
   });
   return (
-    <mesh ref={meshRef}>
-      <icosahedronGeometry args={[2.8, 1]} />
-      <meshBasicMaterial color="#ffffff" wireframe transparent opacity={0.04} />
-    </mesh>
+    <group ref={meshRef}>
+      <mesh>
+        <icosahedronGeometry args={[2.75, 3]} />
+        <meshBasicMaterial color="#0a0a0a" />
+      </mesh>
+      <mesh>
+        <icosahedronGeometry args={[2.76, 1]} />
+        <meshBasicMaterial color="#ffffff" wireframe transparent opacity={0.06} />
+      </mesh>
+    </group>
   );
 }
 
