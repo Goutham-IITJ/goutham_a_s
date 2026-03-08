@@ -44,6 +44,8 @@ export default function AsciiPortrait() {
     canvas.addEventListener("mousemove", handleMouseMove);
     canvas.addEventListener("mouseleave", handleMouseLeave);
 
+    let time = 0;
+
     // Init dot physics state
     const totalDots = COLS * ROWS;
     if (dotsRef.current.length !== totalDots) {
