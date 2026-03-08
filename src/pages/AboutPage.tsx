@@ -439,6 +439,7 @@ const AboutPage = () => {
                           </li>
                         ))}
                       </ul>
+                      </div>
                     </motion.div>
                   );
                 })}
