@@ -262,7 +262,7 @@ const WorkPage = () => {
 
                   {/* Description + Cover Image — split remaining width */}
                   <div className="flex flex-col sm:flex-row gap-6 mt-5">
-                    <p className="text-sm text-muted-foreground leading-relaxed flex-1 min-w-0">
+                    <p className="text-sm text-muted-foreground leading-[1.8] flex-1 min-w-0 max-w-[60%]">
                       {project.description}
                     </p>
                     {project.image && (
