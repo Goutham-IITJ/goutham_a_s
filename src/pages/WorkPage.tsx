@@ -197,10 +197,18 @@ const WorkPage = () => {
                 </span>
 
                 <div className="relative z-10">
-                  {/* Top row */}
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-md border border-border/50 bg-accent/40 flex items-center justify-center">
+                  {/* Top row: number + period */}
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="font-mono text-xs text-muted-foreground/60">{project.num}</span>
+                    <span className="font-mono text-[11px] text-muted-foreground shrink-0 hidden sm:block">
+                      {project.period}
+                    </span>
+                  </div>
+
+                  {/* Two-column split: title left, description right */}
+                  <div className="grid md:grid-cols-[1fr_0.3fr_1fr] grid-cols-1 gap-4 md:gap-0">
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-md border border-border/50 bg-accent/40 flex items-center justify-center shrink-0">
                         <Icon size={15} className="text-muted-foreground" />
                       </div>
                       <div>
@@ -212,15 +220,15 @@ const WorkPage = () => {
                         </p>
                       </div>
                     </div>
-                    <span className="font-mono text-[11px] text-muted-foreground shrink-0 hidden sm:block">
-                      {project.period}
-                    </span>
-                  </div>
 
-                  {/* Description — always visible */}
-                  <p className="text-sm text-muted-foreground leading-relaxed mt-5 max-w-2xl">
-                    {project.description}
-                  </p>
+                    {/* Middle spacer */}
+                    <div className="hidden md:block" />
+
+                    {/* Description */}
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {project.description}
+                    </p>
+                  </div>
 
                   {/* Expanded content */}
                   <motion.div
