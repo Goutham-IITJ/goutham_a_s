@@ -33,8 +33,12 @@ function WireframeShell() {
   });
   return (
     <mesh ref={meshRef}>
-      <icosahedronGeometry args={[2.8, 1]} />
-      <meshBasicMaterial color="#ffffff" wireframe transparent opacity={0.04} />
+      <icosahedronGeometry args={[2.75, 2]} />
+      <meshBasicMaterial color="#0a0a0a" transparent={false} />
+    </mesh>
+    <mesh ref={meshRef}>
+      <icosahedronGeometry args={[2.76, 1]} />
+      <meshBasicMaterial color="#ffffff" wireframe transparent opacity={0.06} />
     </mesh>
   );
 }
