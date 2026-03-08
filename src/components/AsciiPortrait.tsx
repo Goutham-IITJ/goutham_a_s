@@ -44,7 +44,15 @@ export default function AsciiPortrait() {
     canvas.addEventListener("mousemove", handleMouseMove);
     canvas.addEventListener("mouseleave", handleMouseLeave);
 
-    let time = 0;
+    // Init dot physics state
+    const totalDots = COLS * ROWS;
+    if (dotsRef.current.length !== totalDots) {
+      dotsRef.current = Array.from({ length: totalDots }, () => ({ vx: 0, vy: 0, ox: 0, oy: 0 }));
+    }
+    const dots = dotsRef.current;
+
+    const FRICTION = 0.85;
+    const SPRING = 0.15;
 
     const draw = () => {
       ctx.fillStyle = "hsl(0, 0%, 0%)";
@@ -54,28 +62,39 @@ export default function AsciiPortrait() {
 
       for (let row = 0; row < ROWS; row++) {
         for (let col = 0; col < COLS; col++) {
+          const idx = row * COLS + col;
+          const dot = dots[idx];
           const baseX = col * (DOT_SIZE + GAP);
           const baseY = row * (DOT_SIZE + GAP);
 
-          // Repel offset
-          let offsetX = 0;
-          let offsetY = 0;
-
+          // Apply repulsion force
           if (active) {
-            const dx = baseX - mx;
-            const dy = baseY - my;
-            const dist = Math.sqrt(dx * dx + dy * dy);
+            const dx = baseX + dot.ox - mx;
+            const dy = baseY + dot.oy - my;
+            const distSq = dx * dx + dy * dy;
+            const dist = Math.sqrt(distSq);
 
-            if (dist < REPEL_RADIUS && dist > 0) {
-              const force = (1 - dist / REPEL_RADIUS) * REPEL_STRENGTH;
-              const eased = force * force; // quadratic easing for snappier feel
-              offsetX = (dx / dist) * eased * REPEL_RADIUS * 0.4;
-              offsetY = (dy / dist) * eased * REPEL_RADIUS * 0.4;
+            if (dist < REPEL_RADIUS && dist > 0.1) {
+              const force = REPEL_STRENGTH / (distSq + 50); // inverse-square falloff
+              dot.vx += (dx / dist) * force;
+              dot.vy += (dy / dist) * force;
             }
           }
 
-          const x = baseX + offsetX;
-          const y = baseY + offsetY;
+          // Spring back to origin
+          dot.vx -= dot.ox * SPRING;
+          dot.vy -= dot.oy * SPRING;
+
+          // Friction
+          dot.vx *= FRICTION;
+          dot.vy *= FRICTION;
+
+          // Integrate
+          dot.ox += dot.vx;
+          dot.oy += dot.vy;
+
+          const x = baseX + dot.ox;
+          const y = baseY + dot.oy;
 
           // Multiple overlapping sine waves
           const wave1 = Math.sin(col * 0.15 + time * 0.8 + row * 0.05) * 0.5;
