@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import SocialDock from "./SocialDock";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -94,6 +95,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           {children}
         </motion.main>
       </AnimatePresence>
+
+      {location.pathname !== "/contact" && <SocialDock />}
     </div>
   );
 };
