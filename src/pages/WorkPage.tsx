@@ -108,8 +108,8 @@ const projects = [
     ],
     tools: ["Arduino", "GSM (SIM800L)", "GPS (NEO-6M)", "Embedded C"],
     category: "embedded",
-    github: "",
-    demo: "",
+    github: "#",
+    demo: "#",
   },
 ];
 
