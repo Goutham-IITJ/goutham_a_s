@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Code2, Cpu, Shield, ShoppingCart, Eye, Zap } from "lucide-react";
+import { Code2, Cpu, Shield, ShoppingCart, Eye, Zap, Github, ExternalLink } from "lucide-react";
 
 const projects = [
   {
@@ -18,6 +18,8 @@ const projects = [
     ],
     tools: ["Gemini 1.5 Flash", "Python", "Google Wallet API", "SQL", "LangChain", "Pandas"],
     category: "ai",
+    github: "",
+    demo: "",
   },
   {
     num: "02",
@@ -34,6 +36,8 @@ const projects = [
     ],
     tools: ["ROS2", "Gazebo", "YOLOv8", "TD3/PPO", "MongoDB", "SLAM"],
     category: "robotics",
+    github: "",
+    demo: "",
   },
   {
     num: "03",
@@ -50,6 +54,8 @@ const projects = [
     ],
     tools: ["MongoDB", "Express.js", "React", "Node.js", "JWT", "Tailwind CSS", "Razorpay"],
     category: "web",
+    github: "",
+    demo: "",
   },
   {
     num: "04",
@@ -66,6 +72,8 @@ const projects = [
     ],
     tools: ["Python", "OpenCV", "CNN", "Bi-LSTM", "GloVe", "NLP"],
     category: "ai",
+    github: "",
+    demo: "",
   },
   {
     num: "05",
@@ -82,6 +90,8 @@ const projects = [
     ],
     tools: ["Python", "scikit-learn", "XGBoost", "TensorFlow", "NumPy", "Pandas"],
     category: "ai",
+    github: "",
+    demo: "",
   },
   {
     num: "06",
@@ -98,6 +108,8 @@ const projects = [
     ],
     tools: ["Arduino", "GSM (SIM800L)", "GPS (NEO-6M)", "Embedded C"],
     category: "embedded",
+    github: "",
+    demo: "",
   },
 ];
 
@@ -261,11 +273,37 @@ const WorkPage = () => {
                     </div>
                   </div>
 
-                  {/* Expand hint */}
-                  <div className="mt-4 flex items-center gap-1.5">
+                  {/* Links & Expand hint */}
+                  <div className="mt-4 flex items-center justify-between">
                     <span className="font-mono text-[10px] text-muted-foreground/60 group-hover:text-muted-foreground transition-colors">
                       {isExpanded ? "click to collapse" : "click to expand"}
                     </span>
+                    <div className="flex items-center gap-3">
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex items-center gap-1.5 font-mono text-[11px] text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          <Github size={14} />
+                          <span>Code</span>
+                        </a>
+                      )}
+                      {project.demo && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex items-center gap-1.5 font-mono text-[11px] text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          <ExternalLink size={14} />
+                          <span>Demo</span>
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </motion.div>
