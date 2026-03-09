@@ -72,6 +72,8 @@ const projects = [
     ],
     tools: ["Python", "OpenCV", "CNN", "Bi-LSTM", "GloVe", "NLP"],
     category: "ai",
+    github: "",
+    demo: "",
   },
   {
     num: "05",
