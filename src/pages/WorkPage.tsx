@@ -36,8 +36,8 @@ const projects = [
     ],
     tools: ["ROS2", "Gazebo", "YOLOv8", "TD3/PPO", "MongoDB", "SLAM"],
     category: "robotics",
-    github: "",
-    demo: "",
+    github: "#",
+    demo: "#",
   },
   {
     num: "03",
