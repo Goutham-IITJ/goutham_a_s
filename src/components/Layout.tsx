@@ -95,6 +95,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           {children}
         </motion.main>
       </AnimatePresence>
+
+      {location.pathname !== "/contact" && <SocialDock />}
     </div>
   );
 };
