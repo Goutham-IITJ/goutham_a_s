@@ -90,8 +90,8 @@ const projects = [
     ],
     tools: ["Python", "scikit-learn", "XGBoost", "TensorFlow", "NumPy", "Pandas"],
     category: "ai",
-    github: "",
-    demo: "",
+    github: "#",
+    demo: "#",
   },
   {
     num: "06",
