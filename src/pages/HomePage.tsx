@@ -1,13 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter, Instagram } from "lucide-react";
 import TechCanvas from '../components/TechCanvas';
-
-const socialLinks = [
-  { href: "https://github.com", icon: Github, label: "GitHub" },
-  { href: "https://linkedin.com", icon: Linkedin, label: "LinkedIn" },
-  { href: "https://x.com", icon: Twitter, label: "X" },
-  { href: "https://instagram.com", icon: Instagram, label: "Instagram" },
-];
 
 const HomePage = () => {
   return (
