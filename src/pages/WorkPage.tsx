@@ -18,8 +18,8 @@ const projects = [
     ],
     tools: ["Gemini 1.5 Flash", "Python", "Google Wallet API", "SQL", "LangChain", "Pandas"],
     category: "ai",
-    github: "",
-    demo: "",
+    github: "#",
+    demo: "#",
   },
   {
     num: "02",
