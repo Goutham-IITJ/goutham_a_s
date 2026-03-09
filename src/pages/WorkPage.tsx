@@ -54,8 +54,8 @@ const projects = [
     ],
     tools: ["MongoDB", "Express.js", "React", "Node.js", "JWT", "Tailwind CSS", "Razorpay"],
     category: "web",
-    github: "",
-    demo: "",
+    github: "#",
+    demo: "#",
   },
   {
     num: "04",
