@@ -76,10 +76,10 @@ const ContactPage = () => {
         {/* Social Icons */}
         <div className="mt-8 pt-4 border-t border-border/40 flex gap-4">
           {[
-            { href: "https://github.com", icon: <Github size={18} />, label: "GitHub" },
-            { href: "https://linkedin.com", icon: <Linkedin size={18} />, label: "LinkedIn" },
-            { href: "https://x.com", icon: <Twitter size={18} />, label: "X" },
-            { href: "https://instagram.com", icon: <Instagram size={18} />, label: "Instagram" },
+            { href: "https://github.com/Goutham-IITJ", icon: <Github size={18} />, label: "GitHub" },
+            { href: "https://www.linkedin.com/in/gouthamas10/", icon: <Linkedin size={18} />, label: "LinkedIn" },
+            { href: "https://x.com/GouthamAS_", icon: <Twitter size={18} />, label: "X" },
+            { href: "https://www.instagram.com/goutham_.as/", icon: <Instagram size={18} />, label: "Instagram" },
           ].map((s) => (
             <a
               key={s.label}
