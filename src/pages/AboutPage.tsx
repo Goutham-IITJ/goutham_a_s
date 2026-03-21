@@ -95,19 +95,19 @@ const AboutPage = () => {
     offset: ["start start", "end end"],
   });
 
-  const panelY = useTransform(scrollYProgress, [0.1, 0.55], ["100vh", "0vh"]);
-  const panelOpacity = useTransform(scrollYProgress, [0.1, 0.4], [0, 1]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.08]);
-  const heroOpacity = useTransform(scrollYProgress, [0.3, 0.55], [1, 0.3]);
+  const panelY = useTransform(scrollYProgress, [0.06, 0.2], ["20vh", "0vh"]);
+  const panelOpacity = useTransform(scrollYProgress, [0.05, 0.16], [0, 1]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.35], [1, 1.06]);
+  const heroOpacity = useTransform(scrollYProgress, [0.2, 0.4], [1, 0.25]);
 
   const activeCatItems = activeCategory
     ? techCategories.find((c) => c.label === activeCategory)?.items ?? []
     : [];
 
   return (
-    <div ref={containerRef} className="relative h-[250vh] bg-background">
-      <div className="sticky top-0 h-screen overflow-hidden">
-        {/* Hero image layer */}
+    <div ref={containerRef} className="relative bg-background">
+      {/* Hero image layer */}
+      <section className="relative h-screen overflow-hidden">
         <motion.div
           style={{ scale: heroScale, opacity: heroOpacity }}
           className="absolute inset-0 flex items-center justify-center px-4 sm:px-6 pt-14"
@@ -166,12 +166,13 @@ const AboutPage = () => {
             />
           </motion.div>
         </motion.div>
+      </section>
 
-        {/* Sliding content panel */}
-        <motion.div
-          style={{ y: panelY, opacity: panelOpacity }}
-          className="absolute inset-0 bg-background pt-20 sm:pt-24 pb-16 px-6 md:px-12 overflow-y-auto"
-        >
+      {/* Sliding content panel on normal page scroll (single scrollbar). */}
+      <motion.section
+        style={{ y: panelY, opacity: panelOpacity }}
+        className="relative z-20 -mt-12 bg-background/95 backdrop-blur-sm border-t border-border/50 rounded-t-2xl pt-20 sm:pt-24 pb-16 px-6 md:px-12"
+      >
           <div className="max-w-6xl mx-auto">
             <h2 className="font-mono text-xs tracking-[0.3em] text-muted-foreground uppercase mb-12">
               // About
@@ -446,8 +447,7 @@ const AboutPage = () => {
               </div>
             </div>
           </div>
-        </motion.div>
-      </div>
+      </motion.section>
     </div>
   );
 };
