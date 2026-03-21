@@ -18,8 +18,8 @@ const projects = [
     ],
     tools: ["Gemini 1.5 Flash", "Python", "Google Wallet API", "SQL", "LangChain", "Pandas"],
     category: "ai",
-    github: "#",
-    demo: "#",
+    github: "https://github.com/Goutham-IITJ/Project-Raseed",
+    demo: "https://project-raseed.streamlit.app/",
   },
   {
     num: "02",
@@ -36,8 +36,8 @@ const projects = [
     ],
     tools: ["ROS2", "Gazebo", "YOLOv8", "TD3/PPO", "MongoDB", "SLAM"],
     category: "robotics",
-    github: "#",
-    demo: "#",
+    github: "https://github.com/Goutham-IITJ/Autonomous-navigation-and-obstacle-avoidance",
+    demo: "https://drive.google.com/file/d/13R7xB4fHtfAfKa8AxG6ST1RECNnFkxfk/view?usp=drive_link",
   },
   {
     num: "03",
@@ -54,8 +54,8 @@ const projects = [
     ],
     tools: ["MongoDB", "Express.js", "React", "Node.js", "JWT", "Tailwind CSS", "Razorpay"],
     category: "web",
-    github: "#",
-    demo: "#",
+    github: "https://github.com/Goutham-IITJ/E-commerce-platform",
+    demo: "https://e-commerce-platform-plum.vercel.app",
   },
   {
     num: "04",
@@ -72,7 +72,7 @@ const projects = [
     ],
     tools: ["Python", "OpenCV", "CNN", "Bi-LSTM", "GloVe", "NLP"],
     category: "ai",
-    github: "#",
+    github: "https://github.com/Goutham-IITJ/Sentiment_Sphere",
     demo: "#",
   },
   {
@@ -90,7 +90,7 @@ const projects = [
     ],
     tools: ["Python", "scikit-learn", "XGBoost", "TensorFlow", "NumPy", "Pandas"],
     category: "ai",
-    github: "#",
+    github: "https://github.com/Goutham-IITJ/Network-Intrusion-Detector",
     demo: "#",
   },
   {
@@ -108,7 +108,7 @@ const projects = [
     ],
     tools: ["Arduino", "GSM (SIM800L)", "GPS (NEO-6M)", "Embedded C"],
     category: "embedded",
-    github: "#",
+    github: "https://github.com/Goutham-IITJ/Smart-Helmet",
     demo: "#",
   },
 ];
