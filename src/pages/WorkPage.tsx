@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Code2, Cpu, Shield, ShoppingCart, Eye, Zap, Github, ExternalLink } from "lucide-react";
+import { Code2, Cpu, Shield, ShoppingCart, Eye, Zap, Github, ExternalLink, ChevronDown } from "lucide-react";
 
 const projects = [
   {
@@ -275,9 +275,17 @@ const WorkPage = () => {
 
                   {/* Links & Expand hint */}
                   <div className="mt-4 flex items-center justify-between">
-                    <span className="font-mono text-[10px] text-muted-foreground/60 group-hover:text-muted-foreground transition-colors">
-                      {isExpanded ? "click to collapse" : "click to expand"}
-                    </span>
+                    <div className="flex items-center gap-2 group-hover:text-foreground/80 transition-colors">
+                      <motion.div
+                        animate={{ rotate: isExpanded ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <ChevronDown size={16} className="text-muted-foreground group-hover:text-foreground/60" />
+                      </motion.div>
+                      <span className="font-mono text-xs text-muted-foreground group-hover:text-foreground/70 transition-colors">
+                        {isExpanded ? "Click to collapse" : "Click to expand"}
+                      </span>
+                    </div>
                     <div className="flex items-center gap-3">
                       {project.github && (
                         <a
