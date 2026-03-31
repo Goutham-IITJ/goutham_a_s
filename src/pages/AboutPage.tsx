@@ -4,6 +4,8 @@ import { Globe, Bot, ChevronDown, Github, Braces, BarChart3, Cloud, Layout, Pale
 import aboutHero from "@/assets/about-hero.jpeg";
 import AsciiPortrait from "@/components/AsciiPortrait";
 
+import { GitHubCalendar } from 'react-github-calendar';
+
 interface TimelineItem {
   title: string;
   org: string;
@@ -168,7 +170,7 @@ const AboutPage = () => {
         </motion.div>
       </section>
 
-      {/* Sliding content panel on normal page scroll (single scrollbar). */}
+      {/* Sliding content panel on normal page scroll */}
       <motion.section
         style={{ y: panelY, opacity: panelOpacity }}
         className="relative z-20 -mt-12 bg-background/95 backdrop-blur-sm border-t border-border/50 rounded-t-2xl pt-20 sm:pt-24 pb-16 px-6 md:px-12"
@@ -279,7 +281,7 @@ const AboutPage = () => {
               </div>
             </div>
 
-            {/* Technical Skills — interactive category filter + flowing pills */}
+            {/* Technical Skills */}
             <div>
               <h3 className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase mb-8">
                 Technical Skills
@@ -340,6 +342,39 @@ const AboutPage = () => {
                     </motion.span>
                   ))}
                 </AnimatePresence>
+              </motion.div>
+            </div>
+
+            {/* GitHub Activity Feed */}
+            <div className="mt-20">
+              <h3 className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase mb-8">
+                Live_Contribution_Feed.git
+              </h3>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="glass-card p-6 md:p-10 border border-border/20 bg-accent/5 rounded-2xl w-full overflow-x-auto"
+              >
+                <div className="flex justify-center min-w-[750px]">
+                  <GitHubCalendar 
+                    username="Goutham-IITJ" 
+                    colorScheme="dark"
+                    blockSize={12}
+                    blockMargin={4}
+                    fontSize={12}
+                    theme={{
+                      dark: [
+                        'rgba(255, 255, 255, 0.03)', // Empty squares (matches glassmorphism)
+                        'rgba(57, 211, 83, 0.3)',    // Lightest green
+                        'rgba(57, 211, 83, 0.5)',
+                        'rgba(57, 211, 83, 0.8)',
+                        'rgba(57, 211, 83, 1)'       // Darkest green
+                      ]
+                    }}
+                  />
+                </div>
               </motion.div>
             </div>
 
@@ -407,7 +442,8 @@ const AboutPage = () => {
                     <motion.div
                       key={i}
                       initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
                       transition={{ delay: i * 0.1, duration: 0.5 }}
                       className="glass-card overflow-hidden group hover:!border-foreground/20 hover:shadow-[0_0_30px_-8px_hsla(0,0%,100%,0.1)] transition-all duration-300"
                     >
