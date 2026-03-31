@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Code2, Cpu, Shield, ShoppingCart, Eye, Zap, Github, ExternalLink, ChevronDown } from "lucide-react";
+import { ScrambleText } from "../components/ScrambleText";
 
 const projects = [
   {
@@ -140,10 +141,10 @@ const WorkPage = () => {
         className="mb-16"
       >
         <span className="font-mono text-xs tracking-[0.3em] text-muted-foreground uppercase">
-          // Work & Experience
+          <ScrambleText text="// Work & Experience" />
         </span>
         <h1 className="text-3xl md:text-4xl font-light text-foreground mt-4 tracking-tight">
-          Things I've built.
+          <ScrambleText text="Things I've built." />
         </h1>
         <p className="text-muted-foreground text-sm mt-2 max-w-lg">
           A mix of AI systems, robotics, full-stack apps, and embedded hardware — from hackathons to internships.
@@ -159,7 +160,7 @@ const WorkPage = () => {
         <div className="flex items-center gap-3 mb-6">
           <Code2 size={16} className="text-muted-foreground" />
           <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase">
-            Projects
+            <ScrambleText text="Projects" />
           </span>
         </div>
 
@@ -217,7 +218,7 @@ const WorkPage = () => {
                       </div>
                       <div>
                         <h3 className="text-lg md:text-xl font-light text-foreground tracking-tight">
-                          {project.title}
+                          <ScrambleText text={project.title} />
                         </h3>
                         <p className="text-xs text-muted-foreground mt-0.5">
                           {project.subtitle}
@@ -299,7 +300,7 @@ const WorkPage = () => {
                           <span>Code</span>
                         </a>
                       )}
-                      {project.demo && (
+                      {project.demo && project.demo !== "#" && (
                         <a
                           href={project.demo}
                           target="_blank"
@@ -327,7 +328,7 @@ const WorkPage = () => {
           className="mt-20 glass-card p-8 md:p-10"
         >
           <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase block mb-5">
-            Achievements
+            <ScrambleText text="Achievements" />
           </span>
           <div className="space-y-3">
             {[
